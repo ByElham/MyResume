@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Clock, ArrowRight, Sparkles, Compass, Milestone, Waves } from 'lucide-react';
 import { BlogPost } from '../../types';
+import { assetPath } from '../../utils/assetPath';
 import { useLanguage } from '../../context/LanguageContext';
 import { SwissFlag } from './SwissFlag';
 
@@ -40,11 +41,11 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
             {/* Scenic Background Cover */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <img
-                src={post.coverMediaUrl || '/media/blog/03-rhine-falls-waterfall.jpg'}
+                src={post.coverMediaUrl || assetPath('/media/blog/03-rhine-falls-waterfall.jpg')}
                 alt={title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/media/blog/03-rhine-falls-waterfall.svg';
+                  (e.currentTarget as HTMLImageElement).src = assetPath('/media/blog/03-rhine-falls-waterfall.svg');
                 }}
                 referrerPolicy="no-referrer"
               />
@@ -84,11 +85,11 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
                   const target = e.currentTarget as HTMLImageElement;
                   if (post.isLinkedInPost) {
                     if (target.src.endsWith('.jpeg')) {
-                      target.src = '/media/linkedin/graduation/slide-1.jpg';
+                      target.src = assetPath('/media/linkedin/graduation/slide-1.jpg');
                     } else if (target.src.endsWith('.jpg')) {
-                      target.src = '/media/linkedin/graduation/slide-1.png';
+                      target.src = assetPath('/media/linkedin/graduation/slide-1.png');
                     } else {
-                      target.src = '/media/linkedin/graduation/slide-1.svg';
+                      target.src = assetPath('/media/linkedin/graduation/slide-1.svg');
                     }
                   } else if (post.coverMediaUrl) {
                     if (target.src.endsWith('.jpeg')) {
