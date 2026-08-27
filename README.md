@@ -1,231 +1,156 @@
 <div align="center">
 
-# 🌟 Elham Rivaz — Personal Developer Portfolio
+# ER | Electronic Resume
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Motion](https://img.shields.io/badge/Motion-12.2-FF4154?style=for-the-badge&logo=framer&logoColor=white)](https://motion.dev/)
-[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated_Deploy-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+**A meticulously crafted digital portfolio, built with an obsession for motion design, micro-interactions, and pixel-perfect execution.**
 
-<p align="center">
-  A personal developer portfolio crafted for <strong>Elham Rivaz</strong> (AI/ML Engineer & Computer Engineering Graduate, Ranked #1, GPA 19.20/20).
-  <br />
-  Designed with a <strong>macOS Dashboard Aesthetic</strong>, <strong>Trilingual Localization (EN / FA / DE)</strong> with dynamic RTL transitions, <strong>Live Accuracy Counter</strong>, and interactive milestone spotlights.
-</p>
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat&logo=github&logoColor=white)](https://mohammad-hussein-dev.github.io/ER/)
+[![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.0.5-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 
 </div>
 
 ---
 
-## 📑 Table of Contents
+## 🧠 Architecture & Philosophy
 
-- [✨ Key Features](#-key-features)
-- [🛠️ Tech Stack & Architecture](#️-tech-stack--architecture)
-- [📁 Project Structure](#-project-structure)
-- [🚀 Quick Start & Local Setup](#-quick-start--local-setup)
-- [🌐 GitHub Pages Deployment Guide](#-github-pages-deployment-guide)
-- [☁️ Alternative Deployment Platforms](#️-alternative-deployment-platforms)
-- [🖼️ Media & Asset Management](#️-media--asset-management)
-- [🌍 Adding & Editing Translations](#-adding--editing-translations)
-- [📐 Code Quality & Google Style Standards](#-code-quality--google-style-standards)
-- [📄 License & Credits](#-license--credits)
+This project is not just a template; it's a **design system implementation** and a study in frontend craftsmanship. The architecture prioritizes:
 
----
+*   **Component-Driven Development:** Every piece of the UI is a self-contained, reusable component with its own logic and styling.
+*   **Design Token Consistency:** Colors, shadows, and animations are not hardcoded but are driven by a centralized theme configuration, ensuring perfect harmony across light and dark modes.
+*   **Performance-First Animations:** Complex animations (like the Spring Physics and Shimmer) are implemented using **CSS transforms** and **opacity**, which are GPU-accelerated and don't trigger layout recalculations (reflow/repaint), maintaining 60fps smoothness.
+*   **Progressive Enhancement:** The core content (the resume text) is accessible even if JavaScript fails. Animations and interactions enhance the experience for capable browsers.
 
-## ✨ Key Features
+## 🏗️ Project Structure
 
-- 🖥️ **macOS Window Chrome & Dashboard Art Direction:** Sleek window chrome with traffic light controls, glassmorphism backdrop blurs, floating toolbars, and responsive docking layouts.
-- 🌐 **Native Trilingual Engine (EN / FA / DE):** Instant, smooth layout transitions between English (LTR), Persian (RTL with native *Vazirmatn* & *Estedad* typography), and German (LTR).
-- 🌓 **Dynamic Theme System:** Seamless light/dark mode morphing with auto-detection of operating system preferences and persistent `localStorage` synchronization.
-- ⚡ **Live Accuracy Leap Benchmark:** Smooth numerical count-up visualization demonstrating the **58.57% → 97.86%** model benchmark breakthrough with exponential easing curves.
-- 🎓 **Graduation & LinkedIn Milestone Spotlight:** Interactive 3-slide graduation carousel with high-resolution lightbox, auto-fallback image loader, and verified ranking badge.
-- 🌸 **Interactive Sakura Mode:** Japanese cherry blossom particle physics canvas overlay with particle drift and toggle controls.
-- 📱 **100% Responsive & Accessible:** Designed with WCAG AA contrast standards, mobile touch targets (44px+), and fluid desktop scaling.
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Runtime & Core** | `React 19` + `TypeScript 5.8` | Component lifecycle, strict typing, and high performance |
-| **Bundler & Tooling** | `Vite 6` | Instant HMR and tree-shaken static production bundle |
-| **Styling & CSS** | `Tailwind CSS v4` + `@tailwindcss/vite` | Modern utility classes and CSS variables |
-| **Motion & Physics** | `motion/react` | Smooth physics-based spring animations and modal transitions |
-| **Iconography** | `lucide-react` | Clean, standardized vector icons |
-| **Typography** | `Fontshare` + `Google Fonts` | *Cabinet Grotesk*, *General Sans*, *Vazirmatn*, *Estedad*, *JetBrains Mono* |
-| **CI/CD** | `GitHub Actions` | Automated build and deployment to GitHub Pages |
-
----
-
-## 📁 Project Structure
+The codebase follows a scalable and maintainable structure:
 
 ```
-elham-portfolio/
-├── .github/
+ER/
+├── .github/                # GitHub configuration (Actions, etc.)
 │   └── workflows/
-│       └── deploy.yml            # Automated GitHub Pages CI/CD workflow
-├── public/
-│   └── media/
-│       ├── blog/                 # Blog post cover images (.jpg, .jpeg, .svg)
-│       └── linkedin/
-│           └── graduation/       # Graduation milestone slides (slide-1/2/3.jpeg)
+│       └── deploy.yml      # Automated deployment to GitHub Pages
+├── public/                 # Static assets (favicon, etc.)
 ├── src/
-│   ├── components/
-│   │   ├── layout/               # Global shell (Navbar, Footer)
-│   │   ├── sections/             # Core sections (Hero, About, Experience, Projects, Resume, Blog, Contact)
-│   │   └── ui/                   # Modular UI atoms (WindowChrome, SkillPill, Lightbox, etc.)
-│   ├── context/                  # React Context providers (Language, Theme, Sakura)
-│   ├── data/                     # Structured typed data (Profile, Projects, Experience, Blog, Skills)
-│   ├── hooks/                    # Reusable custom hooks (useCountUp, useScrollbarActivity)
-│   ├── i18n/                     # Translation dictionaries (en.ts, fa.ts, de.ts, index.ts)
-│   ├── types/                    # TypeScript interfaces following Google Style Guide
-│   ├── App.tsx                   # Main application layout orchestrator
-│   ├── index.css                 # Global CSS and Tailwind directives
-│   └── main.tsx                  # Application entry point
-├── index.html                    # Root HTML with SEO, OpenGraph & JSON-LD schema
-├── metadata.json                 # Project capabilities & metadata
-├── package.json                  # NPM packages & build scripts
-├── tsconfig.json                 # TypeScript strict compiler configuration
-└── vite.config.ts                # Vite build and plugin setup
+│   ├── components/         # Reusable UI components
+│   │   ├── Button.tsx      # ✨ The advanced, animated button system
+│   │   └── Layout.tsx      # Main layout wrapper
+│   ├── sections/           # Major page sections
+│   │   └── ResumeSection.tsx # ✨ Core component with View/Download logic
+│   ├── styles/             # Global styles & Tailwind config
+│   │   └── globals.css     # Tailwind directives & custom animations
+│   ├── hooks/              # Custom React hooks (e.g., useTheme)
+│   ├── lib/                # Utility functions & helpers
+│   ├── types/              # TypeScript type definitions
+│   ├── data/               # Static data (resume content in JSON/TS)
+│   ├── App.tsx             # Root application component
+│   └── main.tsx            # Application entry point
+├── index.html              # HTML template
+├── package.json            # Dependencies & scripts
+├── tsconfig.json           # TypeScript configuration
+├── vite.config.ts          # Vite build configuration
+└── README.md               # This file
 ```
 
----
+## ✨ Signature Features & Interactions
 
-## 🚀 Quick Start & Local Setup
+What sets this resume apart are the **bespoke micro-interactions** that create a feeling of polish and intentionality.
+
+### 🎯 The "Emerald Eye" View Button
+A custom-styled button that solves a specific UX problem: previewing a PDF without forcing a download.
+*   **Visual Distinction:** Uses a unique `emerald` accent color to differentiate it from the primary download action.
+*   **Animated Feedback:** Features a custom `eye-blink` keyframe animation on hover. The icon subtly scales vertically (`scaleY(0.1)`) to create a blink effect, providing delightful affordance.
+*   **Technical Implementation:** Built upon the shared `Button` component, inheriting all base animations (ripple, spring) while overriding color and adding its unique hover state.
+
+```tsx
+// Simplified conceptual implementation
+const handleView = () => {
+  window.open(resumePdfUrl, '_blank');
+};
+
+<Button
+  variant="outline"
+  className="group border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500"
+  onClick={handleView}
+>
+  <Eye className="w-4 h-4 transition-transform group-hover:animate-eye-blink" />
+  View
+</Button>
+```
+
+### ⚡ Choreographed Animation System
+The UI feels alive through a layered animation system:
+1.  **Ripple Effect (Click):** A material-design-inspired ripple emanates from the click point, confirming user input.
+2.  **Shimmer Sweep (Hover):** A subtle light sweep moves across the button's surface, drawing attention and signifying interactivity.
+3.  **Spring Lift (Hover):** The button gently lifts (`translateY(-2px)`) with a spring-physics easing curve, creating a tactile, physical feel.
+
+### 🎨 Adaptive Theming
+*   **Token-Based:** All colors, shadows, and spacing are defined as CSS custom properties (variables) within `:root` and `[data-theme="dark"]`.
+*   **Seamless Transition:** Theme switching is instant and smooth, with all colors transitioning elegantly using `transition: background-color 0.3s ease, color 0.3s ease`.
+
+## 🛠️ Tech Stack
+
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | ![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=flat&logo=react&logoColor=black) | UI library for building component-based interfaces. |
+| **Language** | ![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178C6?style=flat&logo=typescript&logoColor=white) | Type-safe JavaScript for improved developer experience and code robustness. |
+| **Build Tool** | ![Vite](https://img.shields.io/badge/Vite-6.0.5-646CFF?style=flat&logo=vite&logoColor=white) | Next-generation frontend build tool for lightning-fast HMR and optimized builds. |
+| **Styling** | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.14-06B6D4?style=flat&logo=tailwindcss&logoColor=black) | Utility-first CSS framework for rapid, consistent UI development. |
+| **Hosting** | ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat&logo=github&logoColor=white) | Static site hosting directly from a GitHub repository. |
+| **Automation** | GitHub Actions | CI/CD pipeline for automated testing and deployment. |
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js**: `v18.0.0` or higher (Node 20+ recommended)
-- **Package Manager**: `npm`, `pnpm`, `yarn`, or `bun`
+*   Node.js (v18 or higher recommended)
+*   npm or yarn
 
-### Installation Steps
+### Installation & Development
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/elham-portfolio.git
-   cd elham-portfolio
-   ```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Mohammad-Hussein-Dev/ER.git
+    ```
+2.  **Navigate to the project directory:**
+    ```bash
+    cd ER
+    ```
+3.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+4.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or: pnpm install / yarn install / bun install
-   ```
+### Build for Production
 
-3. **Start the local development server:**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-4. **Verify TypeScript & Linting:**
-   ```bash
-   npm run lint
-   ```
-
-5. **Build for production:**
-   ```bash
-   npm run build
-   ```
-   The compiled static files will be generated in the `dist/` directory.
-
----
-
-## 🌐 GitHub Pages Deployment Guide
-
-This project includes a production-ready GitHub Actions workflow (`.github/workflows/deploy.yml`) for automated one-click deployment.
-
-### Step 1: Set Base Path (If using `username.github.io/repo-name/`)
-If deploying to a sub-path repository (e.g. `https://elhamrivaz.github.io/portfolio/`), configure the `base` property in `vite.config.ts`:
-
-```typescript
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
-
-export default defineConfig({
-  base: '/portfolio/', // Replace with your repository name, or '/' for user pages / custom domains
-  plugins: [react(), tailwindcss()],
-});
+```bash
+npm run build
 ```
+The build artifacts will be stored in the `dist/` directory, ready for deployment.
 
-### Step 2: Enable GitHub Pages in Repository Settings
-1. Push your repository to GitHub:
-   ```bash
-   git add .
-   git commit -m "feat: release production portfolio"
-   git push origin main
-   ```
-2. Navigate to your repository on GitHub:
-   - Go to **Settings** → **Pages** (in the left sidebar).
-   - Under **Build and deployment** → **Source**, select **GitHub Actions**.
+## 🚢 Deployment
 
-3. The workflow will automatically trigger, build the application, and publish your site at:
-   `https://<your-username>.github.io/<repo-name>/`
+This project is configured for **automatic deployment** to GitHub Pages via GitHub Actions.
 
----
+1.  Simply push changes to the `main` branch.
+2.  The `.github/workflows/deploy.yml` workflow will automatically:
+    *   Install dependencies.
+    *   Build the project.
+    *   Deploy the contents of the `dist/` folder to the `gh-pages` branch.
+    *   Your site will be live at `https://mohammad-hussein-dev.github.io/ER/` within a few minutes.
 
-## ☁️ Alternative Deployment Platforms
+## 📄 License
 
-### Vercel
-1. Import your GitHub repository into [Vercel](https://vercel.com).
-2. Framework Preset: **Vite**.
-3. Root Directory: `./`.
-4. Build Command: `npm run build`.
-5. Output Directory: `dist`.
-6. Click **Deploy**.
-
-### Cloudflare Pages
-1. Connect your repository in the Cloudflare Dashboard.
-2. Build command: `npm run build`.
-3. Build output directory: `dist`.
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## 🖼️ Media & Asset Management
-
-All images and media are located in `/public/media/`. The application features an **Auto-Fallback Pipeline** that attempts to load files in the following order:
-$$\text{.jpeg} \longrightarrow \text{.jpg} \longrightarrow \text{.png} \longrightarrow \text{.webp} \longrightarrow \text{.svg (Fallback Vector)}$$
-
-### Image Upload Reference Table
-
-| Target Location | Recommended File Name | Format | Purpose |
-| :--- | :--- | :--- | :--- |
-| `/public/media/linkedin/graduation/` | `slide-1.jpeg` | `.jpeg`, `.jpg`, `.png` | **Slide 1**: Bachelor's Degree & #1 Rank Certificate |
-| `/public/media/linkedin/graduation/` | `slide-2.jpeg` | `.jpeg`, `.jpg`, `.png` | **Slide 2**: Graduation Ceremony with Faculty & Peers |
-| `/public/media/linkedin/graduation/` | `slide-3.jpeg` | `.jpeg`, `.jpg`, `.png` | **Slide 3**: Future Horizons & AI Research Vision |
-| `/public/media/blog/` | `01-eth-zurich-main-building.jpg` | `.jpg`, `.jpeg`, `.png` | Cover for ETH Zurich vision post |
-
----
-
-## 🌍 Adding & Editing Translations
-
-Translations are organized in modular dictionary files in `/src/i18n/`:
-- `src/i18n/en.ts`: English master dictionary.
-- `src/i18n/fa.ts`: Persian (Farsi) translation dictionary.
-- `src/i18n/de.ts`: German translation dictionary.
-
-To add a new translation string:
-1. Add the key and English text to `src/i18n/en.ts`.
-2. Add the corresponding Persian translation to `src/i18n/fa.ts`.
-3. Add the German translation to `src/i18n/de.ts`.
-4. TypeScript will automatically validate type safety across all language files.
-
----
-
-## 📐 Code Quality & Google Style Standards
-
-- **Google TypeScript Style Guide**: All components and interfaces are strictly typed, well-documented with JSDoc, and follow consistent modular structures.
-- **Anti-Slop Visual Hierarchy**: Clean typographic scales, mathematical padding ratios ($2\times$ horizontal vs vertical), and sophisticated contrast palettes.
-- **Performance**: Zero runtime overhead, lazy component loading, and GPU-accelerated CSS transitions.
-
----
-
-## 📄 License & Credits
-
-Released under the [MIT License](LICENSE).  
-Designed and built with passion for **Elham Rivaz**.
+> ### ✨ A Note on Craft
+> *This project was built with an uncompromising attention to detail—a belief that digital experiences can be both functional and beautiful. It is a quiet testament to the idea that code can be crafted with the same care as any other art form.*
+>
+> *A silent nod of appreciation to **Elham Rivas**, whose standard of elegance continues to inspire.*
