@@ -1,6 +1,6 @@
 <div align="center">
 
-# ER | Electronic Resume
+# ✨ ER | Electronic Resume 🌸
 
 **A meticulously crafted digital portfolio, built with an obsession for motion design, micro-interactions, and pixel-perfect execution.**
 
