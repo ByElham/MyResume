@@ -13,6 +13,7 @@ import {
   Languages,
   BookOpen,
   Check,
+  Eye,
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { profileData } from '../../data/profile';
@@ -38,6 +39,11 @@ export const ResumeSection: React.FC = () => {
     setTimeout(() => {
       setDownloaded(false);
     }, 4000);
+  };
+
+  const handleView = () => {
+    // Open the resume PDF in a new browser tab for inline viewing (no download).
+    window.open(assetPath('/documents/Elham-Rivaz-Resume.pdf'), '_blank', 'noopener,noreferrer');
   };
 
   const handlePrint = () => {
@@ -73,6 +79,25 @@ export const ResumeSection: React.FC = () => {
     >
     Print
     </Button>
+    <motion.div whileHover="hover">
+    <Button
+    variant="outline"
+    size="sm"
+    onClick={handleView}
+    icon={
+      <motion.span
+      className="inline-flex"
+      variants={{ hover: { scaleY: [1, 0.1, 1] } }}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
+      >
+      <Eye className="w-3.5 h-3.5" />
+      </motion.span>
+    }
+    className="!border-emerald-500/30 hover:!border-emerald-500/60 !text-emerald-700 dark:!text-emerald-400 hover:!bg-emerald-500/10"
+    >
+    View
+    </Button>
+    </motion.div>
     <Button
     variant="primary"
     size="sm"
@@ -291,20 +316,46 @@ export const ResumeSection: React.FC = () => {
     </p>
     </div>
 
-    <Button
-    variant="primary"
-    size="lg"
-    onClick={handleDownload}
-    icon={downloaded ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
+    <div className="flex items-center gap-2.5 w-full sm:w-auto">
+    <motion.div
     className="w-full sm:w-auto"
-    >
-    {downloaded ? t.resume.downloadSuccess : t.resume.downloadButton}
-    </Button>
-    </div>
-    </article>
-    </WindowChrome>
-    </motion.div>
-    </div>
-    </section>
+    whileHover="hover"
+      >
+      <Button
+      variant="outline"
+      size="lg"
+      onClick={handleView}
+      icon={
+        <motion.span
+        className="inline-flex"
+        variants={{
+          hover: { scaleY: [1, 0.1, 1] },
+        }}
+        transition={{ duration: 0.35, ease: 'easeInOut' }}
+        >
+        <Eye className="w-4 h-4" />
+        </motion.span>
+      }
+      className="w-full sm:w-auto !border-emerald-500/30 hover:!border-emerald-500/60 !text-emerald-700 dark:!text-emerald-400 hover:!bg-emerald-500/10"
+      >
+      View
+      </Button>
+      </motion.div>
+      <Button
+      variant="primary"
+      size="lg"
+      onClick={handleDownload}
+      icon={downloaded ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
+      className="w-full sm:w-auto"
+      >
+      {downloaded ? t.resume.downloadSuccess : t.resume.downloadButton}
+      </Button>
+      </div>
+      </div>
+      </article>
+      </WindowChrome>
+      </motion.div>
+      </div>
+      </section>
   );
 };
