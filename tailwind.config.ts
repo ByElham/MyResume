@@ -1,0 +1,105 @@
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        vogue: [
+          'Bodoni Moda',
+          'Playfair Display',
+          'Didot',
+          'Bodoni MT',
+          'Georgia',
+          'serif',
+        ],
+        accent: [
+          'Bodoni Moda',
+          'Playfair Display',
+          'Fraunces',
+          'Georgia',
+          'serif',
+        ],
+        heading: [
+          'Fraunces',
+          'Playfair Display',
+          'Source Serif 4',
+          'Cabinet Grotesk',
+          'Georgia',
+          'serif',
+        ],
+        display: [
+          'Fraunces',
+          'Playfair Display',
+          'Source Serif 4',
+          'Cabinet Grotesk',
+          'Georgia',
+          'serif',
+        ],
+        body: [
+          'Source Serif 4',
+          'Newsreader',
+          'Georgia',
+          'serif',
+        ],
+        serif: [
+          'Source Serif 4',
+          'Newsreader',
+          'Georgia',
+          'serif',
+        ],
+        editorial: [
+          'Source Serif 4',
+          'Newsreader',
+          'Georgia',
+          'serif',
+        ],
+        ui: [
+          'General Sans',
+          'Plus Jakarta Sans',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
+        ],
+        sans: [
+          'General Sans',
+          'Plus Jakarta Sans',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
+        ],
+        mono: [
+          'JetBrains Mono',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
+        ],
+        persian: [
+          'Estedad',
+          'Vazirmatn',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Tahoma',
+          'sans-serif',
+        ],
+        'persian-heading': [
+          'Estedad',
+          'Vazirmatn',
+          '-apple-system',
+          'sans-serif',
+        ],
+        'persian-serif': [
+          'Noto Serif Persian',
+          'Vazirmatn',
+          'serif',
+        ],
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config;

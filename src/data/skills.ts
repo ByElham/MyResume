@@ -1,0 +1,108 @@
+import { SkillCategory } from '../types';
+
+export const skillCategories: SkillCategory[] = [
+  {
+    id: 'aiMl',
+    labelKey: 'categories.aiMl',
+    skills: [
+      'Deep Learning',
+      'Computer Vision',
+      'Convolutional Neural Networks (CNN)',
+      'Transfer Learning',
+      'Model Fine-Tuning',
+      'Supervised & Unsupervised Learning',
+      'Feature Extraction',
+      'Ablation Studies',
+      'Model Evaluation & Metrics',
+    ],
+  },
+  {
+    id: 'genAi',
+    labelKey: 'categories.genAi',
+    skills: [
+      'RAG (Retrieval-Augmented Generation)',
+      'LangChain',
+      'ChromaDB',
+      'OpenRouter API',
+      'Prompt Engineering',
+      'AI Agents Architecture',
+      'Vector Embeddings',
+      'Context Injection',
+    ],
+  },
+  {
+    id: 'languages',
+    labelKey: 'categories.languages',
+    skills: [
+      'Python',
+      'C++',
+      'C#',
+      'SQL',
+      'TypeScript / JavaScript',
+      'HTML5 / CSS3',
+    ],
+  },
+  {
+    id: 'frameworks',
+    labelKey: 'categories.frameworks',
+    skills: [
+      'PyTorch',
+      'Torchvision',
+      'TensorFlow / Keras',
+      'Scikit-Learn',
+      'Django',
+      'REST APIs',
+      'OpenCV',
+      'Matplotlib & Seaborn',
+    ],
+  },
+  {
+    id: 'data',
+    labelKey: 'categories.data',
+    skills: [
+      'ChromaDB Vector DB',
+      'Pandas',
+      'NumPy',
+      'Data Cleaning & Imputation',
+      'Exploratory Data Analysis (EDA)',
+      'Git & GitHub',
+      'Arch Linux / POSIX Shell',
+    ],
+  },
+  {
+    id: 'coreCs',
+    labelKey: 'categories.coreCs',
+    skills: [
+      'Data Structures & Algorithms',
+      'Information Retrieval (Inverted Index)',
+      'Graph Search (A*, Minimax, Alpha-Beta)',
+      'Propositional Logic',
+      'Bayesian Networks',
+      'Constraint Satisfaction (CSP)',
+      'Software Architecture',
+    ],
+  },
+  {
+    id: 'math',
+    labelKey: 'categories.math',
+    skills: [
+      'Linear Algebra for AI',
+      'Multivariable Calculus & Gradients',
+      'Probability & Statistics',
+      'Optimization & Loss Formulations',
+      'Discrete Mathematics',
+    ],
+  },
+  {
+    id: 'softSkills',
+    labelKey: 'categories.softSkills',
+    skills: [
+      'Scientific Research & Literature Review',
+      'Technical Mentorship & Teaching',
+      'Cross-cultural Collaboration',
+      'Problem Decomposition',
+      'Technical Documentation',
+      'Curiosity & Continuous Learning',
+    ],
+  },
+];

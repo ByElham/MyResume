@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad_08lucernechapelbridgesvg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e1065" />
+      <stop offset="60%" stop-color="#581c87" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <pattern id="grid_08lucernechapelbridgesvg" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="url(#bgGrad_08lucernechapelbridgesvg)" />
+  <rect width="800" height="480" fill="url(#grid_08lucernechapelbridgesvg)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="180" r="220" fill="#c084fc" opacity="0.18" filter="blur(40px)" />
+
+  <!-- Central Symbol / Illustration -->
+  <g transform="translate(0, -10)">
+    <rect x="360" y="110" width="80" height="170" fill="#3b0764" stroke="#c084fc" stroke-width="2"/>
+      <polygon points="400,50 350,110 450,110" fill="#a855f7"/>
+      <path d="M 120,230 L 680,230 L 680,250 L 120,250 Z" fill="#7e22ce"/>
+      <polygon points="120,210 400,180 680,210 680,230 120,230" fill="#9333ea"/>
+      <path d="M 100,260 Q 400,240 700,260 L 700,300 L 100,300 Z" fill="#38bdf8" opacity="0.6"/>
+  </g>
+
+  <!-- Top Badge -->
+  <rect x="36" y="32" width="240" height="32" rx="16" fill="#000000" fill-opacity="0.4" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="48" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="1.5">LUZERN • VIERWALDSTÄTTERSEE</text>
+
+  <!-- Swiss Flag icon in top-right -->
+  <rect x="724" y="32" width="40" height="32" rx="6" fill="#da291c" />
+  <rect x="740" y="38" width="8" height="20" fill="#ffffff" />
+  <rect x="734" y="44" width="20" height="8" fill="#ffffff" />
+
+  <!-- Bottom Details Gradient Box -->
+  <rect x="0" y="350" width="800" height="130" fill="url(#bgGrad_08lucernechapelbridgesvg)" opacity="0.95" />
+  <rect x="0" y="350" width="800" height="1" fill="#ffffff" opacity="0.1" />
+
+  <text x="40" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#ffffff">Lucerne Historic Kapellbrücke & Water Tower</text>
+  <text x="40" y="425" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500" fill="#d4d4d8">Lake Lucerne & 14th Century Covered Wooden Bridge</text>
+  <text x="40" y="452" font-family="monospace" font-size="12" fill="#c084fc">/media/blog/switzerland-dream/08-lucerne-chapel-bridge.jpg</text>
+</svg>

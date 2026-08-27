@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad_01ethzurichmainbuildingsvg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="60%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <pattern id="grid_01ethzurichmainbuildingsvg" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="url(#bgGrad_01ethzurichmainbuildingsvg)" />
+  <rect width="800" height="480" fill="url(#grid_01ethzurichmainbuildingsvg)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="180" r="220" fill="#6366f1" opacity="0.18" filter="blur(40px)" />
+
+  <!-- Central Symbol / Illustration -->
+  <g transform="translate(0, -10)">
+    <rect x="260" y="160" width="280" height="140" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="3"/>
+      <polygon points="400,90 230,165 570,165" fill="#312e81" stroke="#818cf8" stroke-width="3"/>
+      <circle cx="400" cy="135" r="16" fill="#818cf8" opacity="0.8"/>
+      <rect x="290" y="190" width="30" height="45" rx="4" fill="#60a5fa" opacity="0.85"/>
+      <rect x="340" y="190" width="30" height="45" rx="4" fill="#60a5fa" opacity="0.85"/>
+      <rect x="385" y="190" width="30" height="45" rx="4" fill="#60a5fa" opacity="0.85"/>
+      <rect x="430" y="190" width="30" height="45" rx="4" fill="#60a5fa" opacity="0.85"/>
+      <rect x="480" y="190" width="30" height="45" rx="4" fill="#60a5fa" opacity="0.85"/>
+      <rect x="375" y="245" width="50" height="55" rx="4" fill="#e0e7ff"/>
+  </g>
+
+  <!-- Top Badge -->
+  <rect x="36" y="32" width="240" height="32" rx="16" fill="#000000" fill-opacity="0.4" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="48" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="1.5">ETH ZURICH • ZÜRICH</text>
+
+  <!-- Swiss Flag icon in top-right -->
+  <rect x="724" y="32" width="40" height="32" rx="6" fill="#da291c" />
+  <rect x="740" y="38" width="8" height="20" fill="#ffffff" />
+  <rect x="734" y="44" width="20" height="8" fill="#ffffff" />
+
+  <!-- Bottom Details Gradient Box -->
+  <rect x="0" y="350" width="800" height="130" fill="url(#bgGrad_01ethzurichmainbuildingsvg)" opacity="0.95" />
+  <rect x="0" y="350" width="800" height="1" fill="#ffffff" opacity="0.1" />
+
+  <text x="40" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#ffffff">ETH Zürich — Main Academic Building</text>
+  <text x="40" y="425" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500" fill="#d4d4d8">Dept. of Computer Science & Vision Lab</text>
+  <text x="40" y="452" font-family="monospace" font-size="12" fill="#6366f1">/media/blog/switzerland-dream/01-eth-zurich-main-building.jpg</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad_05swissalpspanoramicsvg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="60%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <pattern id="grid_05swissalpspanoramicsvg" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="url(#bgGrad_05swissalpspanoramicsvg)" />
+  <rect width="800" height="480" fill="url(#grid_05swissalpspanoramicsvg)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="180" r="220" fill="#38bdf8" opacity="0.18" filter="blur(40px)" />
+
+  <!-- Central Symbol / Illustration -->
+  <g transform="translate(0, -10)">
+    <polygon points="400,70 260,280 540,280" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+      <polygon points="400,70 350,140 400,160 450,140" fill="#f8fafc"/>
+      <polygon points="210,130 110,280 310,280" fill="#1e293b"/>
+      <polygon points="210,130 180,180 240,180" fill="#e2e8f0" opacity="0.9"/>
+      <polygon points="590,140 490,280 690,280" fill="#1e293b"/>
+      <polygon points="590,140 560,190 620,190" fill="#e2e8f0" opacity="0.9"/>
+  </g>
+
+  <!-- Top Badge -->
+  <rect x="36" y="32" width="240" height="32" rx="16" fill="#000000" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="48" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="1.5">ALPS • VALAIS & ZERMATT</text>
+
+  <!-- Swiss Flag icon in top-right -->
+  <rect x="724" y="32" width="40" height="32" rx="6" fill="#da291c" />
+  <rect x="740" y="38" width="8" height="20" fill="#ffffff" />
+  <rect x="734" y="44" width="20" height="8" fill="#ffffff" />
+
+  <!-- Bottom Details Gradient Box -->
+  <rect x="0" y="350" width="800" height="130" fill="url(#bgGrad_05swissalpspanoramicsvg)" opacity="0.95" />
+  <rect x="0" y="350" width="800" height="1" fill="#ffffff" opacity="0.1" />
+
+  <text x="40" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#ffffff">The Majestic Swiss Alps & Matterhorn</text>
+  <text x="40" y="425" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500" fill="#d4d4d8">Alpine Summits, High-Altitude Precision</text>
+  <text x="40" y="452" font-family="monospace" font-size="12" fill="#38bdf8">/media/blog/switzerland-dream/05-swiss-alps-panoramic.jpg</text>
+</svg>

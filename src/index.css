@@ -1,0 +1,749 @@
+@import "tailwindcss";
+
+@theme {
+  --font-vogue: 'Bodoni Moda', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
+  --font-accent: 'Bodoni Moda', 'Playfair Display', 'Fraunces', Georgia, serif;
+  --font-heading: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
+  --font-display: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
+  --font-body: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  --font-serif: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  --font-editorial: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  --font-ui: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-persian: 'Estedad', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  --font-persian-heading: 'Estedad', 'Vazirmatn', -apple-system, sans-serif;
+  --font-persian-serif: 'Noto Serif Persian', 'Vazirmatn', serif;
+
+  --color-primary: var(--bg-primary);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-surface-elevated);
+  --color-content: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-hover: var(--border-hover);
+}
+
+@layer base {
+  :root {
+    --font-vogue: 'Bodoni Moda', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
+    --font-accent: 'Bodoni Moda', 'Playfair Display', 'Fraunces', Georgia, serif;
+    --font-heading: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
+    --font-display: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
+    --font-body: 'Source Serif 4', 'Newsreader', Georgia, serif;
+    --font-serif: 'Source Serif 4', 'Newsreader', Georgia, serif;
+    --font-editorial: 'Source Serif 4', 'Newsreader', Georgia, serif;
+    --font-ui: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-persian: 'Estedad', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+    --font-persian-heading: 'Estedad', 'Vazirmatn', -apple-system, sans-serif;
+    --font-persian-serif: 'Noto Serif Persian', 'Vazirmatn', serif;
+
+    /* Light Mode Tokens - Deep, high-contrast, crystal clear */
+    --bg-primary: #F8F9FA;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #F1F3F5;
+    --border-subtle: rgba(0, 0, 0, 0.14);
+    --border-hover: rgba(0, 0, 0, 0.28);
+    --text-primary: #090A0C;
+    --text-secondary: #18191D;
+    --text-tertiary: #272A30;
+    --accent: #4338CA;
+    --accent-hover: #3730A3;
+    --shadow-color: rgba(15, 15, 20, 0.12);
+
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F8F9FA;
+    --code-bg: rgba(0, 0, 0, 0.06);
+    --traffic-red: #E11D48;
+    --traffic-yellow: #D97706;
+    --traffic-green: #059669;
+
+    --glass-shadow: 0 10px 30px rgba(15, 15, 20, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+    --glass-shadow-hover: 0 18px 45px rgba(15, 15, 20, 0.14), 0 0 20px rgba(67, 56, 202, 0.15), 0 0 3px rgba(67, 56, 202, 0.3);
+
+    /* Scrollbar tokens - Light mode */
+    --scrollbar-track: rgba(0, 0, 0, 0.04);
+    --scrollbar-thumb-idle: rgba(79, 70, 229, 0.7);
+    --scrollbar-thumb-hover: #4338CA;
+    --scrollbar-thumb-active: #3730A3;
+    --scrollbar-glow-idle: rgba(79, 70, 229, 0.25);
+    --scrollbar-glow-hover: rgba(79, 70, 229, 0.6);
+    --scrollbar-thumb-gradient: linear-gradient(180deg, #6366F1 0%, #4F46E5 100%);
+    --scrollbar-thumb-gradient-hover: linear-gradient(180deg, #4F46E5 0%, #3730A3 100%);
+  }
+
+  /* Light Mode Sakura Theme */
+  html.sakura-mode:not(.dark) {
+    --bg-primary: #FAF6F8;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #FFF1F5;
+    --border-subtle: rgba(244, 114, 182, 0.22);
+    --border-hover: rgba(244, 114, 182, 0.4);
+    --text-primary: #1F151B;
+    --text-secondary: #634E59;
+    --text-tertiary: #967E8B;
+    --accent: #E11D48;
+    --accent-hover: #BE123C;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FFF1F5;
+    --glass-shadow: 0 8px 24px rgba(225, 29, 72, 0.06), 0 0 0 1px rgba(244, 114, 182, 0.15);
+    --glass-shadow-hover: 0 16px 40px rgba(225, 29, 72, 0.12), 0 0 20px rgba(244, 114, 182, 0.25), 0 0 3px rgba(225, 29, 72, 0.25);
+    --scrollbar-thumb-idle: rgba(225, 29, 72, 0.75);
+    --scrollbar-thumb-hover: #BE123C;
+    --scrollbar-thumb-active: #9F1239;
+    --scrollbar-thumb-gradient: linear-gradient(180deg, #FB7185 0%, #E11D48 100%);
+    --scrollbar-thumb-gradient-hover: linear-gradient(180deg, #E11D48 0%, #BE123C 100%);
+  }
+
+  .dark {
+    --bg-primary: #0A0A0B;
+    --bg-surface: #151517;
+    --bg-surface-elevated: #1C1C1F;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.16);
+    --text-primary: #F2F2F2;
+    --text-secondary: #A1A1AA;
+    --text-tertiary: #6B6B70;
+    --accent: #6366F1;
+    --accent-hover: #818CF8;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+
+    --bg-card: rgba(21, 21, 23, 0.85);
+    --bg-card-hover: rgba(28, 28, 31, 0.95);
+    --code-bg: rgba(255, 255, 255, 0.05);
+    --traffic-red: #FF5F56;
+    --traffic-yellow: #FFBD2E;
+    --traffic-green: #27C93F;
+
+    --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+    --glass-shadow-hover: 0 24px 50px -12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(99, 102, 241, 0.25), 0 0 4px rgba(99, 102, 241, 0.35), 0 0 1px 1px rgba(255, 255, 255, 0.15) inset;
+
+    /* Scrollbar tokens - Dark mode */
+    --scrollbar-track: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb-idle: rgba(129, 140, 248, 0.65);
+    --scrollbar-thumb-hover: #A5B4FC;
+    --scrollbar-thumb-active: #818CF8;
+    --scrollbar-glow-idle: rgba(99, 102, 241, 0.4);
+    --scrollbar-glow-hover: rgba(129, 140, 248, 0.85);
+    --scrollbar-thumb-gradient: linear-gradient(180deg, rgba(165, 180, 252, 0.75) 0%, rgba(99, 102, 241, 0.65) 100%);
+    --scrollbar-thumb-gradient-hover: linear-gradient(180deg, #C7D2FE 0%, #818CF8 100%);
+  }
+
+  /* Dark Mode Sakura Theme */
+  html.sakura-mode.dark {
+    --bg-primary: #0F0A0E;
+    --bg-surface: #181116;
+    --bg-surface-elevated: #241921;
+    --border-subtle: rgba(244, 114, 182, 0.16);
+    --border-hover: rgba(244, 114, 182, 0.32);
+    --text-primary: #FDE8F1;
+    --text-secondary: #C4A5B5;
+    --text-tertiary: #876878;
+    --accent: #FB7185;
+    --accent-hover: #FDA4AF;
+    --bg-card: rgba(24, 17, 22, 0.85);
+    --bg-card-hover: rgba(36, 25, 33, 0.95);
+    --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(244, 114, 182, 0.1) inset;
+    --glass-shadow-hover: 0 24px 50px -12px rgba(0, 0, 0, 0.9), 0 0 24px rgba(251, 113, 133, 0.3), 0 0 4px rgba(251, 113, 133, 0.4), 0 0 1px 1px rgba(244, 114, 182, 0.2) inset;
+    --scrollbar-thumb-idle: rgba(251, 113, 133, 0.7);
+    --scrollbar-thumb-hover: #FDA4AF;
+    --scrollbar-thumb-active: #FB7185;
+    --scrollbar-thumb-gradient: linear-gradient(180deg, #FDA4AF 0%, #FB7185 100%);
+    --scrollbar-thumb-gradient-hover: linear-gradient(180deg, #FFE4E6 0%, #FDA4AF 100%);
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+  }
+
+  /* Light mode contrast enforcement for rich, deep typography */
+  html:not(.dark) {
+    color: #090A0C;
+  }
+  
+  html:not(.dark) h1,
+  html:not(.dark) h2,
+  html:not(.dark) h3,
+  html:not(.dark) h4,
+  html:not(.dark) h5,
+  html:not(.dark) h6 {
+    color: #090A0C;
+  }
+
+  html:not(.dark) p:not([class*="text-white"]):not([class*="text-rose-"]):not([class*="text-indigo-"]) {
+    color: #18191D;
+  }
+
+  /* German language typography tuning for compound words */
+  html[lang="de"],
+  [lang="de"] {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+  }
+
+  /* Persian language typography */
+  html[dir="rtl"],
+  html[lang="fa"],
+  [dir="rtl"] {
+    font-family: var(--font-persian), 'Estedad', 'Vazirmatn', sans-serif !important;
+  }
+
+  /* Headings default to refined literary serif (Fraunces / Playfair Display / Source Serif 4) */
+  h1, h2, h3, h4, h5, h6,
+  .font-heading,
+  .font-display {
+    font-family: var(--font-heading);
+    letter-spacing: -0.015em;
+  }
+
+  /* Vogue-style fashion editorial display accents */
+  .font-vogue,
+  .font-accent {
+    font-family: var(--font-vogue);
+    letter-spacing: -0.01em;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6,
+  html[dir="rtl"] .font-heading,
+  html[dir="rtl"] .font-display,
+  html[dir="rtl"] .font-vogue,
+  html[dir="rtl"] .font-accent,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6,
+  [dir="rtl"] .font-heading,
+  [dir="rtl"] .font-display,
+  [dir="rtl"] .font-vogue,
+  [dir="rtl"] .font-accent {
+    font-family: var(--font-persian-heading), 'Estedad', 'Vazirmatn', sans-serif !important;
+    letter-spacing: 0 !important;
+  }
+
+  code, pre, kbd, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-editorial,
+  .font-serif,
+  .font-body,
+  .editorial-body {
+    font-family: var(--font-serif);
+  }
+
+  .font-ui,
+  .font-sans {
+    font-family: var(--font-ui);
+  }
+
+  html[dir="rtl"] .font-editorial,
+  html[dir="rtl"] .font-serif,
+  html[dir="rtl"] .editorial-body,
+  [dir="rtl"] .font-editorial,
+  [dir="rtl"] .font-serif,
+  [dir="rtl"] .editorial-body {
+    font-family: var(--font-persian-serif), 'Noto Serif Persian', 'Vazirmatn', serif !important;
+  }
+
+  html[dir="rtl"] .font-ui,
+  html[dir="rtl"] .font-sans,
+  [dir="rtl"] .font-ui,
+  [dir="rtl"] .font-sans {
+    font-family: var(--font-persian), 'Estedad', 'Vazirmatn', sans-serif !important;
+  }
+
+  html[dir="rtl"] .font-mono,
+  html[dir="rtl"] code,
+  html[dir="rtl"] pre,
+  [dir="rtl"] .font-mono,
+  [dir="rtl"] code,
+  [dir="rtl"] pre {
+    font-family: var(--font-mono), 'JetBrains Mono', monospace !important;
+    direction: ltr;
+  }
+}
+
+/* Explicit font utility classes */
+.font-vogue {
+  font-family: var(--font-vogue) !important;
+}
+
+.font-accent {
+  font-family: var(--font-accent) !important;
+}
+
+.font-heading,
+.font-display {
+  font-family: var(--font-heading) !important;
+}
+
+.font-body,
+.font-serif,
+.font-editorial,
+.editorial-body {
+  font-family: var(--font-serif) !important;
+}
+
+.font-ui,
+.font-sans {
+  font-family: var(--font-ui) !important;
+}
+
+.font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+.font-persian {
+  font-family: var(--font-persian) !important;
+}
+
+.font-persian-heading {
+  font-family: var(--font-persian-heading) !important;
+}
+
+.font-persian-serif {
+  font-family: var(--font-persian-serif) !important;
+}
+
+html[dir="rtl"] .font-vogue,
+html[dir="rtl"] .font-accent,
+html[dir="rtl"] .font-heading,
+html[dir="rtl"] .font-display,
+[dir="rtl"] .font-vogue,
+[dir="rtl"] .font-accent,
+[dir="rtl"] .font-heading,
+[dir="rtl"] .font-display {
+  font-family: var(--font-persian-heading), 'Estedad', 'Vazirmatn', sans-serif !important;
+}
+
+html[dir="rtl"] .font-editorial,
+html[dir="rtl"] .font-serif,
+html[dir="rtl"] .font-body,
+html[dir="rtl"] .editorial-body,
+[dir="rtl"] .font-editorial,
+[dir="rtl"] .font-serif,
+[dir="rtl"] .font-body,
+[dir="rtl"] .editorial-body {
+  font-family: var(--font-persian-serif), 'Noto Serif Persian', 'Vazirmatn', serif !important;
+}
+
+html[dir="rtl"] .font-ui,
+html[dir="rtl"] .font-sans,
+[dir="rtl"] .font-ui,
+[dir="rtl"] .font-sans {
+  font-family: var(--font-persian), 'Estedad', 'Vazirmatn', sans-serif !important;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glass-shadow-hover);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.window-card-focus {
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.window-card-focus:hover,
+.window-card-focus:focus-within {
+  transform: scale(1.02);
+  box-shadow: var(--glass-shadow-hover);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.traffic-dot {
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.window-card-focus:hover .traffic-dot,
+.glass-panel:hover .traffic-dot {
+  filter: brightness(1.18);
+}
+
+.glass-nav {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.glass-pill {
+  background: var(--code-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Ambient blob keyframes - GPU only */
+@keyframes ambientBlob1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(40px, -50px, 0) scale(1.1);
+  }
+  66% {
+    transform: translate3d(-30px, 20px, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes ambientBlob2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(-50px, 30px, 0) scale(1.15);
+  }
+  66% {
+    transform: translate3d(30px, -40px, 0) scale(0.9);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.animate-blob-1 {
+  animation: ambientBlob1 22s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-blob-2 {
+  animation: ambientBlob2 28s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Ken Burns subtle cinematic camera drift */
+@keyframes kenBurnsDrift {
+  0% {
+    transform: scale(1.0) translate(0%, 0%);
+  }
+  50% {
+    transform: scale(1.08) translate(-1.5%, -1.2%);
+  }
+  100% {
+    transform: scale(1.0) translate(0%, 0%);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsDrift 24s ease-in-out infinite alternate;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Rotating Gradient Border Animations for Showcase Covers */
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-gradient {
+  animation: rotateGradient 6s linear infinite;
+  will-change: transform;
+}
+
+.animate-rotate-gradient-fast {
+  animation: rotateGradient 3.5s linear infinite;
+  will-change: transform;
+}
+
+.animate-rotate-gradient-slow {
+  animation: rotateGradient 10s linear infinite;
+  will-change: transform;
+}
+
+/* Realistic Swiss flag gentle waving motion */
+@keyframes swissFlagWave {
+  0% {
+    transform: perspective(400px) rotateY(0deg) skewY(0deg) scaleY(1);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)) brightness(1);
+  }
+  25% {
+    transform: perspective(400px) rotateY(12deg) skewY(2.5deg) scaleY(0.98);
+    filter: drop-shadow(1px 3px 6px rgba(0,0,0,0.22)) brightness(1.04);
+  }
+  50% {
+    transform: perspective(400px) rotateY(-4deg) skewY(-1.5deg) scaleY(1.02);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)) brightness(0.97);
+  }
+  75% {
+    transform: perspective(400px) rotateY(8deg) skewY(1.8deg) scaleY(0.99);
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.2)) brightness(1.03);
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg) skewY(0deg) scaleY(1);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)) brightness(1);
+  }
+}
+
+.animate-swiss-wave {
+  animation: swissFlagWave 4.5s ease-in-out infinite;
+  transform-origin: left center;
+  will-change: transform, filter;
+}
+
+html[dir="rtl"] .animate-swiss-wave {
+  transform-origin: right center;
+}
+
+/* Arch Linux Logo Glow & Crystal Shimmer Animation */
+@keyframes archGlowBreathe {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.4)) drop-shadow(0 0 8px rgba(23, 147, 209, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.85)) drop-shadow(0 0 14px rgba(23, 147, 209, 0.5));
+  }
+}
+
+@keyframes archLightSweep {
+  0% {
+    stop-color: #38BDF8;
+    offset: -30%;
+  }
+  50% {
+    stop-color: #ffffff;
+    offset: 50%;
+  }
+  100% {
+    stop-color: #38BDF8;
+    offset: 130%;
+  }
+}
+
+.animate-arch-glow {
+  animation: archGlowBreathe 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-arch-glow {
+    animation: none !important;
+    filter: drop-shadow(0 0 5px rgba(23, 147, 209, 0.5)) !important;
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-blob-1,
+  .animate-blob-2 {
+    animation: none !important;
+  }
+}
+
+/* Print Styles for Clean Resume Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  nav, footer, .no-print, .ambient-blobs {
+    display: none !important;
+  }
+  .glass-panel {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    background: transparent !important;
+  }
+}
+
+/* ==========================================================================
+   Custom Premium Theme-Aware Scrollbar
+   ========================================================================== */
+
+/* Firefox Fallback */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-idle) transparent;
+}
+
+/* WebKit / Blink (Chromium, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+  background-color: transparent;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+  border-radius: 9999px;
+  margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-idle);
+  background-image: var(--scrollbar-thumb-gradient);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 8px var(--scrollbar-glow-idle);
+  opacity: 0.65;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-image 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dynamic auto-fade during active document or container scrolling */
+html[data-scrolling="true"] ::-webkit-scrollbar-thumb,
+[data-scrolling="true"]::-webkit-scrollbar-thumb {
+  opacity: 0.95;
+  box-shadow: 0 0 10px var(--scrollbar-glow-idle);
+}
+
+/* Interactive macOS-style hover expansion & illumination with rich color burst */
+::-webkit-scrollbar:hover {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+  background-image: var(--scrollbar-thumb-gradient-hover);
+  background-clip: padding-box;
+  border-width: 1px;
+  box-shadow: 0 0 16px var(--scrollbar-glow-hover), 0 0 4px var(--scrollbar-glow-hover);
+  opacity: 1;
+}
+
+/* Active drag state */
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active);
+  background-image: var(--scrollbar-thumb-gradient-hover);
+  background-clip: padding-box;
+  border-width: 0px;
+  box-shadow: 0 0 20px var(--scrollbar-glow-hover), 0 0 6px var(--scrollbar-glow-hover);
+  opacity: 1;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Custom Scrollbar Utility for modal dialogs and scrollable inner panes */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-idle) var(--scrollbar-track);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 9999px;
+  margin: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-idle);
+  background-image: var(--scrollbar-thumb-gradient);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 8px var(--scrollbar-glow-idle);
+  opacity: 0.65;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-scrollbar::-webkit-scrollbar:hover {
+  width: 11px;
+  height: 11px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-image: var(--scrollbar-thumb-gradient-hover);
+  background-clip: padding-box;
+  border-width: 1px;
+  box-shadow: 0 0 16px var(--scrollbar-glow-hover);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-thumb,
+  .custom-scrollbar::-webkit-scrollbar,
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    transition: none !important;
+  }
+}
+
