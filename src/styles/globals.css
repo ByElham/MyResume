@@ -1,0 +1,239 @@
+/**
+ * @fileoverview Global styles, CSS custom properties, and typography for theme-aware design.
+ * Features a 7-layer semantic token system for seamless Light & Dark modes,
+ * Unicode-range font segmentation for Persian mixed-script, and glassmorphism.
+ */
+
+/* ============================================
+   UNICODE-RANGE FONT SEGMENTATION (Zero-JS)
+   Latin characters (English, German, Numbers) -> Inter / System UI
+   Persian / Arabic characters -> Vazirmatn / Estedad
+   ============================================ */
+
+@font-face {
+  font-family: 'MixedText';
+  src: local('Inter'), local('Inter Variable'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), sans-serif;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MixedText';
+  src: local('Vazirmatn'), local('Estedad'), local('Tahoma'), sans-serif;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MixedText';
+  src: local('Inter'), local('Vazirmatn'), local('system-ui'), sans-serif;
+  font-display: swap;
+}
+
+/* ============================================
+   THEME VARIABLES & 7-LAYER SEMANTIC TOKENS
+   ============================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Background Layers (Light Mode) */
+  --bg-page: #f8fafc;                    /* slate-50 */
+  --bg-surface: #ffffff;                 /* pure white cards */
+  --bg-elevated: #f1f5f9;                /* slate-100 */
+  --bg-glass: rgba(255, 255, 255, 0.78); /* opaque glass fallback for light mode */
+  --bg-inset: #e2e8f0;                  /* slate-200 */
+  --bg-primary: #f8fafc;
+  --bg-surface-elevated: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+
+  /* Text Colors (Light Mode - WCAG AAA compliant rich obsidian) */
+  --text-primary: #090A0C;               /* pitch black/obsidian — crisp readability */
+  --text-secondary: #1F2328;             /* deep charcoal for body */
+  --text-tertiary: #3D444D;              /* refined dark neutral */
+  --text-muted: #59636E;                 /* readable muted */
+  --text-inverted: #ffffff;              /* white for dark buttons/badges */
+  --text-inverse: #ffffff;
+
+  /* Border Colors (Light Mode) */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.08);   /* visible on light */
+  --border-strong: rgba(0, 0, 0, 0.15);   /* stronger borders */
+  --border-hover: rgba(0, 0, 0, 0.18);
+
+  /* Accents */
+  --accent-primary: #3b82f6;             /* Blue */
+  --accent-secondary: #6366f1;           /* Indigo */
+  --accent: #4f46e5;                     /* Primary Accent */
+  --accent-hover: #4338ca;
+  --accent-light: #e0e7ff;
+  --accent-dark: #3730a3;
+
+  /* Glass / Frosted */
+  --glass-border: rgba(0, 0, 0, 0.09);
+  --glass-backdrop: blur(16px) saturate(145%);
+
+  /* Shadows */
+  --shadow-color: rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.09);
+  --shadow-xl: 0 20px 45px rgba(15, 23, 42, 0.12);
+  --glass-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --glass-shadow-hover: 0 18px 45px rgba(15, 23, 42, 0.12), 0 0 20px rgba(79, 70, 229, 0.12);
+
+  --code-bg: rgba(0, 0, 0, 0.05);
+  --traffic-red: #ef4444;
+  --traffic-yellow: #f59e0b;
+  --traffic-green: #10b981;
+}
+
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  /* Background Layers (Dark Mode - Preserved) */
+  --bg-page: #0a0a0f;                    /* deep dark bg */
+  --bg-surface: #13131f;                 /* card bg */
+  --bg-elevated: #1a1a2e;                /* elevated panel */
+  --bg-glass: rgba(255, 255, 255, 0.05); /* subtle glass */
+  --bg-inset: #0f0f18;
+  --bg-primary: #0a0a0f;
+  --bg-surface-elevated: #1a1a2e;
+  --bg-card: rgba(19, 19, 31, 0.85);
+  --bg-card-hover: rgba(26, 26, 46, 0.95);
+
+  /* Text Colors (Dark Mode) */
+  --text-primary: #f8fafc;               /* white-ish slate-50 */
+  --text-secondary: #cbd5e1;             /* slate-300 */
+  --text-tertiary: #94a3b8;              /* slate-400 */
+  --text-muted: #64748b;                 /* slate-500 */
+  --text-inverted: #0f172a;              /* dark for light elements */
+  --text-inverse: #0a0a0f;
+
+  /* Border Colors (Dark Mode) */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-hover: rgba(255, 255, 255, 0.18);
+
+  /* Accents */
+  --accent-primary: #60a5fa;
+  --accent-secondary: #818cf8;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-light: rgba(129, 140, 248, 0.15);
+  --accent-dark: #a5b4fc;
+
+  /* Glass / Frosted */
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-backdrop: blur(16px) saturate(150%);
+
+  /* Shadows */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.50);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.60);
+  --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+  --glass-shadow-hover: 0 24px 50px -12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(99, 102, 241, 0.25), 0 0 1px 1px rgba(255, 255, 255, 0.15) inset;
+
+  --code-bg: rgba(255, 255, 255, 0.05);
+  --traffic-red: #ff5f56;
+  --traffic-yellow: #ffbd2e;
+  --traffic-green: #27c93f;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   GLASS PANEL UTILITY
+   ============================================ */
+
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+  .glass-panel {
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.glass-panel-hover:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   WINDOW CHROME (macOS-style card)
+   ============================================ */
+
+.window-chrome {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.window-chrome-titlebar {
+  background: linear-gradient(to bottom, var(--bg-surface), var(--bg-elevated));
+  border-bottom: 1px solid var(--border-medium);
+  padding: 0.625rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.window-chrome-content {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* ============================================
+   RTL ICON FLIP DIRECTIVE
+   ============================================ */
+
+[dir="rtl"] .rtl\:scale-x-\[-1\],
+html[dir="rtl"] .rtl\:scale-x-\[-1\] {
+  transform: scaleX(-1);
+}

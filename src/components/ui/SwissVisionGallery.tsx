@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   Compass,
   MapPin,
   ZoomIn,
-  ChevronLeft,
-  ChevronRight,
-  X,
   GraduationCap,
   Building2,
   Waves,
@@ -14,11 +11,11 @@ import {
   Mountain,
   Sparkles,
   Cpu,
-  Info,
   Layers,
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { SwissFlag } from './SwissFlag';
+import { MediaLightbox, LightboxMediaItem } from './MediaLightbox';
 
 export interface GalleryItem {
   id: string;
@@ -38,7 +35,7 @@ interface SwissVisionGalleryProps {
 }
 
 export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items }) => {
-  const { t, isRtl } = useLanguage();
+  const { t } = useLanguage();
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'academic' | 'nature' | 'heritage' | 'vision'>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -73,31 +70,6 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
   const filteredItems =
     selectedFilter === 'all' ? items : items.filter((item) => item.category === selectedFilter);
 
-  // Keyboard navigation for Lightbox
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (lightboxIndex === null) return;
-      if (e.key === 'Escape') {
-        setLightboxIndex(null);
-      } else if (e.key === 'ArrowRight') {
-        if (isRtl) {
-          setLightboxIndex((prev) => (prev! - 1 + filteredItems.length) % filteredItems.length);
-        } else {
-          setLightboxIndex((prev) => (prev! + 1) % filteredItems.length);
-        }
-      } else if (e.key === 'ArrowLeft') {
-        if (isRtl) {
-          setLightboxIndex((prev) => (prev! + 1) % filteredItems.length);
-        } else {
-          setLightboxIndex((prev) => (prev! - 1 + filteredItems.length) % filteredItems.length);
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex, filteredItems.length, isRtl]);
-
   const getCategoryIcon = (type: string) => {
     switch (type) {
       case 'eth':
@@ -121,28 +93,31 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
     }
   };
 
-  const handleNextLightbox = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => ((prev! + 1) % filteredItems.length));
-  };
-
-  const handlePrevLightbox = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => ((prev! - 1 + filteredItems.length) % filteredItems.length));
-  };
+  // Convert filtered items to unified LightboxMediaItem list
+  const lightboxMediaItems: LightboxMediaItem[] = filteredItems.map((item) => ({
+    id: item.id,
+    imagePath: item.imagePath,
+    fallbackSvg: item.fallbackSvg,
+    title: (t.blog as any)[item.titleKey] || item.titleKey,
+    description: (t.blog as any)[item.descriptionKey] || item.descriptionKey,
+    location: (t.blog as any)[item.locationKey] || item.locationKey,
+    category: item.category,
+    number: item.number,
+    fileName: item.fileName,
+  }));
 
   return (
-    <div className="rounded-2xl p-5 sm:p-7 bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.08] dark:border-white/10 space-y-6">
+    <div className="rounded-2xl p-4 sm:p-7 bg-[var(--bg-inset)]/30 border border-[var(--border-subtle)] space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/[0.08] dark:border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-5">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <SwissFlag size="sm" />
-            <h3 className="font-display font-bold text-lg sm:text-xl text-[#0F1115] dark:text-white flex items-center gap-2">
+            <h3 className="font-display font-bold text-lg sm:text-xl text-[var(--text-primary)] flex items-center gap-2">
               <span>{t.blog.galleryHeading}</span>
             </h3>
           </div>
-          <p className="font-editorial text-xs sm:text-sm text-[#1A1A1E] dark:text-white/70 font-normal">
+          <p className="font-editorial text-xs sm:text-sm text-[var(--text-secondary)] font-normal">
             {t.blog.gallerySub}
           </p>
         </div>
@@ -162,11 +137,12 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
           return (
             <button
               key={tab.id}
+              type="button"
               onClick={() => setSelectedFilter(tab.id as any)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 select-none cursor-pointer ${
+              className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 select-none cursor-pointer ${
                 isSelected
                   ? 'bg-rose-600 text-white shadow-md shadow-rose-500/20 font-bold'
-                  : 'bg-black/[0.05] dark:bg-white/5 text-[#0F1115] dark:text-white/70 hover:text-neutral-950 dark:hover:text-white hover:bg-black/[0.09] dark:hover:bg-white/10 font-semibold'
+                  : 'bg-[var(--bg-inset)] text-[var(--text-primary)] hover:bg-[var(--bg-inset)]/80 font-semibold'
               }`}
             >
               {Icon && <Icon className="w-3.5 h-3.5" />}
@@ -184,7 +160,7 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
       </div>
 
       {/* Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 pt-1">
         {filteredItems.map((item, idx) => {
           const itemTitle = (t.blog as any)[item.titleKey] || item.titleKey;
           const itemLoc = (t.blog as any)[item.locationKey] || item.locationKey;
@@ -197,7 +173,7 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.25 }}
-              className="group relative rounded-xl border border-black/[0.08] dark:border-white/10 bg-white dark:bg-neutral-900/80 hover:border-rose-500/40 hover:shadow-xl hover:shadow-rose-500/5 transition-all overflow-hidden flex flex-col justify-between cursor-pointer"
+              className="group relative rounded-xl border border-black/[0.08] dark:border-white/10 bg-white dark:bg-neutral-900/80 hover:border-rose-500/40 hover:shadow-xl hover:shadow-rose-500/10 transition-all overflow-hidden flex flex-col justify-between cursor-pointer"
               onClick={() => setLightboxIndex(idx)}
             >
               {/* Card Image Area with Zoom Trigger */}
@@ -205,6 +181,7 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
                 <img
                   src={item.imagePath}
                   alt={itemTitle}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
@@ -237,7 +214,7 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">
                   <div className="px-3.5 py-1.5 rounded-full bg-white/95 text-neutral-900 text-xs font-semibold flex items-center gap-1.5 shadow-xl">
                     <ZoomIn className="w-3.5 h-3.5 text-rose-600" />
-                    <span>{t.blog.galleryViewFull || 'مشاهده تصویر و جزئیات'}</span>
+                    <span>{t.blog.galleryViewFull || 'بزرگ‌نمایی و مشاهده کامل'}</span>
                   </div>
                 </div>
 
@@ -267,7 +244,7 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
                     {item.category}
                   </span>
                   <div className="text-rose-700 dark:text-rose-400 group-hover:underline flex items-center gap-1 font-bold">
-                    <span>{t.blog.galleryViewFull || 'مشاهده جزئیات'}</span>
+                    <span>{t.blog.galleryViewFull || 'بزرگ‌نمایی'}</span>
                     <ZoomIn className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -277,148 +254,15 @@ export const SwissVisionGallery: React.FC<SwissVisionGalleryProps> = ({ items })
         })}
       </div>
 
-      {/* Fullscreen Lightbox Modal */}
-      <AnimatePresence>
-        {lightboxIndex !== null && filteredItems[lightboxIndex] && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[70] flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/92 backdrop-blur-xl overflow-y-auto"
-            onClick={() => setLightboxIndex(null)}
-          >
-            <div
-              className="relative max-w-4xl w-full flex flex-col items-center my-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setLightboxIndex(null)}
-                className="absolute -top-12 right-0 sm:right-0 p-2 rounded-full bg-white/15 hover:bg-rose-600 text-white transition-all cursor-pointer shadow-lg flex items-center gap-1 text-xs font-mono px-3"
-                title="بستن (Esc)"
-              >
-                <X className="w-4 h-4" />
-                <span className="hidden sm:inline">Esc</span>
-              </button>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={handlePrevLightbox}
-                className="absolute left-2 sm:-left-14 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10 cursor-pointer shadow-lg backdrop-blur-md"
-                title="قبلی"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-
-              <button
-                onClick={handleNextLightbox}
-                className="absolute right-2 sm:-right-14 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10 cursor-pointer shadow-lg backdrop-blur-md"
-                title="بعدی"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-
-              {/* Lightbox Image & Info Container */}
-              <div className="w-full rounded-2xl overflow-hidden border border-white/15 bg-neutral-950 shadow-2xl flex flex-col">
-                <div className="relative max-h-[62vh] min-h-[260px] flex items-center justify-center bg-black p-2 sm:p-4">
-                  <img
-                    src={filteredItems[lightboxIndex].imagePath}
-                    alt={(t.blog as any)[filteredItems[lightboxIndex].titleKey] || filteredItems[lightboxIndex].titleKey}
-                    className="max-h-[58vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
-                    onError={(e) => {
-                      const target = e.currentTarget as HTMLImageElement;
-                      const item = filteredItems[lightboxIndex];
-                      const src = target.src;
-                      if (src.endsWith('.jpeg')) {
-                        target.src = item.imagePath.replace(/\.jpeg$/i, '.jpg');
-                      } else if (src.endsWith('.jpg')) {
-                        target.src = item.imagePath.replace(/\.jpg$/i, '.png');
-                      } else if (src.endsWith('.png')) {
-                        target.src = item.imagePath.replace(/\.png$/i, '.webp');
-                      } else {
-                        target.src = item.fallbackSvg;
-                      }
-                    }}
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-
-                {/* Thumbnail Strip */}
-                <div className="px-4 py-2.5 bg-neutral-950/90 border-t border-white/10 flex items-center gap-2 overflow-x-auto">
-                  {filteredItems.map((item, idx) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setLightboxIndex(idx)}
-                      className={`relative shrink-0 w-12 h-9 rounded-md overflow-hidden border transition-all cursor-pointer ${
-                        lightboxIndex === idx
-                          ? 'border-rose-500 ring-2 ring-rose-500/40 scale-105 opacity-100'
-                          : 'border-white/10 opacity-50 hover:opacity-90'
-                      }`}
-                    >
-                      <img
-                        src={item.imagePath}
-                        alt={item.number}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.currentTarget as HTMLImageElement;
-                          const src = target.src;
-                          if (src.endsWith('.jpeg')) {
-                            target.src = item.imagePath.replace(/\.jpeg$/i, '.jpg');
-                          } else if (src.endsWith('.jpg')) {
-                            target.src = item.imagePath.replace(/\.jpg$/i, '.png');
-                          } else if (src.endsWith('.png')) {
-                            target.src = item.imagePath.replace(/\.png$/i, '.webp');
-                          } else {
-                            target.src = item.fallbackSvg;
-                          }
-                        }}
-                      />
-                    </button>
-                  ))}
-                </div>
-
-                {/* Lightbox Caption & Detailed Story */}
-                <div className="p-5 sm:p-6 bg-neutral-900 border-t border-white/10 text-white space-y-3">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
-                        <SwissFlag size="sm" />
-                        <span>#{filteredItems[lightboxIndex].number} / {filteredItems.length}</span>
-                      </span>
-                      <span className="font-mono text-xs text-neutral-300 flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-rose-400" />
-                        {(t.blog as any)[filteredItems[lightboxIndex].locationKey] || filteredItems[lightboxIndex].locationKey}
-                      </span>
-                    </div>
-
-                    <span className="font-mono text-xs text-neutral-400 capitalize px-2 py-0.5 rounded bg-white/5 border border-white/10">
-                      {filteredItems[lightboxIndex].category}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display font-bold text-lg sm:text-xl text-white">
-                    {(t.blog as any)[filteredItems[lightboxIndex].titleKey] || filteredItems[lightboxIndex].titleKey}
-                  </h3>
-
-                  <p className="font-editorial text-sm sm:text-base text-neutral-200 leading-relaxed">
-                    {(t.blog as any)[filteredItems[lightboxIndex].descriptionKey] || filteredItems[lightboxIndex].descriptionKey}
-                  </p>
-
-                  <div className="pt-2 flex items-center justify-between text-xs text-neutral-400 font-mono">
-                    <span className="flex items-center gap-1 text-[11px] text-neutral-400">
-                      <Info className="w-3 h-3 text-rose-400" />
-                      <span>{filteredItems[lightboxIndex].fileName}</span>
-                    </span>
-                    <span className="text-[11px] text-neutral-500 hidden sm:inline">
-                      Use Arrow Keys ← → to navigate
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Unified High-Performance Media Lightbox Modal */}
+      {lightboxIndex !== null && (
+        <MediaLightbox
+          isOpen={lightboxIndex !== null}
+          onClose={() => setLightboxIndex(null)}
+          items={lightboxMediaItems}
+          initialIndex={lightboxIndex}
+        />
+      )}
     </div>
   );
 };

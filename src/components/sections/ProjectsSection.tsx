@@ -39,7 +39,7 @@ export const ProjectsSection: React.FC = () => {
             <div className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
               {t.projects.tag}
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-neutral-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[var(--text-primary)] tracking-tight">
               {t.projects.title}
             </h2>
           </motion.div>
@@ -61,7 +61,7 @@ export const ProjectsSection: React.FC = () => {
                   className={`relative px-3.5 py-1.5 text-xs font-mono rounded-xl transition-colors select-none cursor-pointer ${
                     isActive
                       ? 'text-white font-bold'
-                      : 'text-neutral-600 hover:text-neutral-900 dark:text-white/50 dark:hover:text-white'
+                      : 'text-neutral-800 hover:text-black dark:text-white/60 dark:hover:text-white font-semibold'
                   }`}
                 >
                   {isActive && (

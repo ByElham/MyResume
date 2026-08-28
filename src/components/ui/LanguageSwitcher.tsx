@@ -29,7 +29,7 @@ export const LanguageSwitcher: React.FC<{ className?: string }> = ({ className =
             className={`relative z-10 px-2.5 py-1 text-[11px] font-mono font-bold transition-colors duration-200 rounded-full cursor-pointer select-none ${
               isActive
                 ? 'text-white'
-                : 'text-neutral-600 hover:text-neutral-900 dark:text-white/40 dark:hover:text-white'
+                : 'text-neutral-800 hover:text-black dark:text-white/60 dark:hover:text-white'
             }`}
           >
             {isActive && (

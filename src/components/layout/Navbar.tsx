@@ -23,6 +23,7 @@ import { BespokeBrandLogo } from '../ui/BespokeBrandLogo';
 import { ArchLinuxLogo } from '../ui/ArchLinuxLogo';
 import { SwissFlag } from '../ui/SwissFlag';
 import { profileData } from '../../data/profile';
+import { ScrollProgressBar } from '../ui/ScrollProgressBar';
 
 export const Navbar: React.FC = () => {
   const { t, isRtl, language } = useLanguage();
@@ -129,23 +130,23 @@ export const Navbar: React.FC = () => {
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/85 dark:bg-white/[0.04] border border-black/15 dark:border-white/10 backdrop-blur-xl shadow-xs font-ui">
+            <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/90 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 backdrop-blur-xl shadow-xs font-ui">
               {navItems.map((item) => {
                 const isActive = activeSection === item.id;
                 return (
                   <a
                     key={item.id}
                     href={item.href}
-                    className={`relative px-3.5 py-1.5 text-xs font-ui font-medium rounded-full transition-colors duration-200 select-none ${
+                    className={`relative px-3.5 py-1.5 text-xs font-ui font-semibold rounded-full transition-colors duration-200 select-none ${
                       isActive
                         ? 'text-indigo-700 dark:text-white font-bold'
-                        : 'text-[#272A30] hover:text-[#0F1115] dark:text-white/70 dark:hover:text-white'
+                        : 'text-neutral-800 hover:text-black dark:text-white/70 dark:hover:text-white'
                     }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="active-nav-pill"
-                        className="absolute inset-0 bg-indigo-50 dark:bg-white/15 rounded-full shadow-xs border border-indigo-200 dark:border-white/20"
+                        className="absolute inset-0 bg-indigo-500/10 dark:bg-white/15 rounded-full shadow-xs border border-indigo-500/20 dark:border-white/20"
                         transition={{
                           type: 'spring',
                           stiffness: 400,
@@ -215,6 +216,9 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Top Reading Scroll Progress Line */}
+        <ScrollProgressBar />
       </header>
 
       {/* Luxury Bespoke Full-Screen Mobile Drawer Modal (Zero-bug, High-contrast) */}

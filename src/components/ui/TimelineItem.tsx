@@ -48,7 +48,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
       <div className="glass-panel glass-panel-hover rounded-2xl p-5 sm:p-6 transition-all duration-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-base sm:text-lg font-bold font-display text-[#0F1115] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+            <h3 className="text-base sm:text-lg font-bold font-display text-[var(--text-primary)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
               {role}
             </h3>
             <div className="flex items-center gap-1.5 text-sm font-semibold text-indigo-700 dark:text-indigo-400 mt-0.5">
@@ -57,12 +57,12 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-medium text-[#272A30] dark:text-neutral-400">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/5">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-medium text-[var(--text-tertiary)]">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[var(--bg-inset)] border border-[var(--border-subtle)]">
               <Calendar className="w-3 h-3" />
               {period}
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/5">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[var(--bg-inset)] border border-[var(--border-subtle)]">
               <MapPin className="w-3 h-3" />
               {location}
             </span>
@@ -70,7 +70,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
         </div>
 
         {/* Bullets */}
-        <ul className="space-y-2 mb-4 text-sm text-[#1A1A1E] dark:text-neutral-300 font-normal">
+        <ul className="space-y-2 mb-4 text-sm text-[var(--text-secondary)] font-normal">
           {bullets.map((bullet: string, i: number) => (
             <li key={i} className="flex items-start gap-2.5 leading-relaxed">
               <CheckCircle className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
@@ -81,7 +81,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
 
         {/* Tech stack */}
         {entry.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-3 border-t border-black/10 dark:border-white/5">
+          <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[var(--border-subtle)]">
             {entry.techStack.map((tech) => (
               <SkillPill key={tech} skill={tech} variant="subtle" />
             ))}

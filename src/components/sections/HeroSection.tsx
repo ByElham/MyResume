@@ -19,6 +19,7 @@ import { WindowChrome } from '../ui/WindowChrome';
 import { AnimatedCounter } from '../ui/AnimatedCounter';
 import { ElhamCoverCard } from '../ui/ElhamCoverCard';
 import { HeroStatBadge } from '../ui/HeroStatBadge';
+import { MixedText } from '../ui/MixedText';
 
 export const HeroSection: React.FC = () => {
   const { t, isRtl, language } = useLanguage();
@@ -32,11 +33,11 @@ export const HeroSection: React.FC = () => {
       id="hero"
       className="relative min-h-[90vh] pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center justify-center overflow-hidden"
     >
-      {/* Ambient Floating Mesh Blobs (Frosted Glass glow) */}
+      {/* Ambient Floating Mesh Blobs (Frosted Glass glow with lower opacity in light mode) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-indigo-500/10 dark:bg-indigo-900/30 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-900/20 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-600/[0.03] dark:bg-indigo-500/[0.05] rounded-full blur-[140px]" />
+        <div className="absolute top-[-15%] left-[-10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-indigo-500/5 dark:bg-indigo-900/20 sm:dark:bg-indigo-900/30 rounded-full blur-[70px] sm:blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-violet-500/5 dark:bg-violet-900/15 sm:dark:bg-violet-900/20 rounded-full blur-[60px] sm:blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] bg-indigo-600/[0.02] dark:bg-indigo-500/[0.03] sm:dark:bg-indigo-500/[0.05] rounded-full blur-[80px] sm:blur-[140px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -55,10 +56,10 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-[#0F1115] dark:text-white leading-[1.05] mb-6">
-              <span className="text-[#272A30] dark:text-white/60 font-medium text-2xl sm:text-3xl md:text-4xl block mb-2 font-display">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.05] mb-6">
+              <span className="text-[var(--text-secondary)] font-medium text-2xl sm:text-3xl md:text-4xl block mb-2 font-display">
                 {t.hero.headlinePrefix}{' '}
-                <span className="font-vogue italic font-bold text-[#0F1115] dark:text-white">{displayName}</span>
+                <span className="font-vogue italic font-bold text-[var(--text-primary)]">{displayName}</span>
               </span>
               <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 dark:from-indigo-400 dark:via-indigo-300 dark:to-violet-400 bg-clip-text text-transparent font-display">
                 {t.hero.headlineSuffix}
@@ -66,8 +67,8 @@ export const HeroSection: React.FC = () => {
             </h1>
 
             {/* Bio Paragraph */}
-            <p className="font-editorial text-base sm:text-xl text-[#1A1A1E] dark:text-white/85 leading-relaxed mb-8 max-w-2xl">
-              {t.hero.bio}
+            <p className="font-editorial text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed mb-8 max-w-2xl font-normal">
+              {language === 'fa' ? <MixedText text={t.hero.bio} /> : t.hero.bio}
             </p>
 
             {/* Key Academic Badges Grid */}
@@ -143,25 +144,27 @@ export const HeroSection: React.FC = () => {
             className="lg:col-span-5 flex flex-col gap-4"
           >
             {/* View Switcher Header between Animated Rotating Cover Card and Terminal Inspector */}
-            <div className="flex items-center justify-between p-1.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/15 dark:border-white/10 backdrop-blur-xl">
+            <div className="flex items-center justify-between p-1.5 rounded-2xl bg-[var(--bg-inset)] border border-[var(--border-medium)] backdrop-blur-xl">
               <div className="flex items-center gap-1 w-full">
                 <button
+                  type="button"
                   onClick={() => setActiveRightTab('cover')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl text-xs font-ui font-medium transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl text-xs font-ui font-medium transition-all duration-200 cursor-pointer ${
                     activeRightTab === 'cover'
-                      ? 'bg-white dark:bg-neutral-800 text-indigo-700 dark:text-indigo-300 shadow-sm font-bold border border-black/10 dark:border-white/10'
-                      : 'text-[#272A30] dark:text-white/70 hover:text-[#0F1115] dark:hover:text-white'
+                      ? 'bg-[var(--bg-surface)] text-indigo-700 dark:text-indigo-300 shadow-sm font-bold border border-[var(--border-subtle)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:text-white/70 dark:hover:text-white font-medium'
                   }`}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{language === 'fa' ? 'کاور اختصاصی الهام ریواز' : 'Dedicated Cover'}</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => setActiveRightTab('terminal')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl text-xs font-mono transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer ${
                     activeRightTab === 'terminal'
-                      ? 'bg-white dark:bg-neutral-800 text-indigo-700 dark:text-indigo-300 shadow-sm font-bold border border-black/10 dark:border-white/10'
-                      : 'text-[#272A30] dark:text-white/70 hover:text-[#0F1115] dark:hover:text-white'
+                      ? 'bg-[var(--bg-surface)] text-indigo-700 dark:text-indigo-300 shadow-sm font-bold border border-[var(--border-subtle)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:text-white/70 dark:hover:text-white font-medium'
                   }`}
                 >
                   <Code2 className="w-3.5 h-3.5" />
@@ -179,21 +182,23 @@ export const HeroSection: React.FC = () => {
                 actions={
                   <div className="flex items-center gap-1">
                     <button
+                      type="button"
                       onClick={() => setTerminalTab('profile')}
-                      className={`px-2 py-0.5 text-[10px] font-mono rounded transition-colors ${
+                      className={`px-2 py-0.5 text-[10px] font-mono rounded transition-colors cursor-pointer ${
                         terminalTab === 'profile'
                           ? 'bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 font-bold'
-                          : 'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200'
+                          : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                       }`}
                     >
                       profile.json
                     </button>
                     <button
+                      type="button"
                       onClick={() => setTerminalTab('model')}
-                      className={`px-2 py-0.5 text-[10px] font-mono rounded transition-colors ${
+                      className={`px-2 py-0.5 text-[10px] font-mono rounded transition-colors cursor-pointer ${
                         terminalTab === 'model'
                           ? 'bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 font-bold'
-                          : 'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200'
+                          : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                       }`}
                     >
                       model_eval.py
@@ -203,13 +208,13 @@ export const HeroSection: React.FC = () => {
                 className="border-indigo-500/20 shadow-xl"
               >
                 {terminalTab === 'profile' ? (
-                  <div className="font-mono text-xs text-neutral-700 dark:text-neutral-300 space-y-2 leading-relaxed">
+                  <div className="font-mono text-xs text-[var(--text-secondary)] space-y-2 leading-relaxed" dir="ltr">
                     <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold">
                       <span className="text-emerald-500">➜</span>
                       <span>{t.hero.terminalPrompt}</span>
                     </div>
-                    <div className="pl-3 border-l-2 border-indigo-500/30 text-neutral-600 dark:text-neutral-400 space-y-1">
-                      <p className="text-neutral-900 dark:text-neutral-200 font-semibold">{'{'}</p>
+                    <div className="pl-3 border-l-2 border-indigo-500/30 text-[var(--text-tertiary)] dark:text-neutral-400 space-y-1">
+                      <p className="text-[var(--text-primary)] dark:text-neutral-200 font-semibold">{'{'}</p>
                       <p className="pl-3">
                         <span className="text-indigo-500">"engineer"</span>: <span className="text-emerald-600 dark:text-emerald-400">"{displayName}"</span>,
                       </p>
@@ -217,7 +222,7 @@ export const HeroSection: React.FC = () => {
                         <span className="text-indigo-500">"degree"</span>: <span className="text-amber-600 dark:text-amber-400">"B.Sc. Computer Engineering (Rank #1)"</span>,
                       </p>
                       <p className="pl-3">
-                        <span className="text-indigo-500">"institution"</span>: <span className="text-neutral-800 dark:text-neutral-200">"Shiraz University"</span>,
+                        <span className="text-indigo-500">"institution"</span>: <span className="text-[var(--text-primary)] dark:text-neutral-200">"Shiraz University"</span>,
                       </p>
                       <p className="pl-3">
                         <span className="text-indigo-500">"research"</span>: <span className="text-violet-600 dark:text-violet-400">"University of Queensland (UQ)"</span>,
@@ -232,23 +237,23 @@ export const HeroSection: React.FC = () => {
                       <p className="pl-3">
                         <span className="text-indigo-500">"top_metric"</span>: <span className="text-emerald-600 dark:text-emerald-400">"97.86% Accuracy (+39.29% gain)"</span>
                       </p>
-                      <p className="text-neutral-900 dark:text-neutral-200 font-semibold">{'}'}</p>
+                      <p className="text-[var(--text-primary)] dark:text-neutral-200 font-semibold">{'}'}</p>
                     </div>
                   </div>
                 ) : (
-                  <div className="font-mono text-xs text-neutral-700 dark:text-neutral-300 space-y-2 leading-relaxed">
+                  <div className="font-mono text-xs text-[var(--text-secondary)] space-y-2 leading-relaxed" dir="ltr">
                     <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold">
                       <span className="text-emerald-500">➜</span>
                       <span>python evaluate_classifier.py --dataset=dogs_vs_cats</span>
                     </div>
-                    <div className="pl-3 border-l-2 border-emerald-500/30 text-neutral-600 dark:text-neutral-400 space-y-1">
-                      <p className="text-neutral-500">[INFO] Loading 4 Architectures: CNN, ResNet, VGG, MobileNet</p>
-                      <p className="text-neutral-500">[INFO] Baseline Vanilla CNN Validation: 58.57%</p>
+                    <div className="pl-3 border-l-2 border-emerald-500/30 text-[var(--text-tertiary)] dark:text-neutral-400 space-y-1">
+                      <p className="text-[var(--text-muted)]">[INFO] Loading 4 Architectures: CNN, ResNet, VGG, MobileNet</p>
+                      <p className="text-[var(--text-muted)]">[INFO] Baseline Vanilla CNN Validation: 58.57%</p>
                       <p className="text-indigo-500">[INFO] Applying Transfer Learning & Fine-Tuning...</p>
                       <p className="text-emerald-600 dark:text-emerald-400 font-bold">
                         [RESULT] Test Accuracy: 97.86% (Loss: 0.0614, F1-Score: 0.978)
                       </p>
-                      <p className="text-neutral-400 text-[11px] mt-2">
+                      <p className="text-[var(--text-muted)] text-[11px] mt-2">
                         // Model checkpoints saved to models/best_classifier.pth
                       </p>
                     </div>

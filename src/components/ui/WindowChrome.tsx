@@ -15,7 +15,7 @@ interface WindowChromeProps {
 export const WindowChrome: React.FC<WindowChromeProps> = ({
   title,
   className = '',
-  contentClassName,
+  contentClassName = '',
   children,
   actions,
   showDots = true,
@@ -26,12 +26,12 @@ export const WindowChrome: React.FC<WindowChromeProps> = ({
 
   return (
     <div
-      className={`rounded-2xl glass-panel overflow-hidden shadow-2xl ${
+      className={`window-chrome ${
         hoverZoom ? 'window-card-focus' : ''
       } ${className}`}
     >
       {/* macOS Window Titlebar */}
-      <div className="h-11 px-4 sm:px-5 border-b border-black/[0.08] dark:border-white/10 bg-black/[0.03] dark:bg-white/5 flex items-center justify-between backdrop-blur-md select-none shrink-0">
+      <div className="window-chrome-titlebar h-11 px-4 sm:px-5 select-none shrink-0">
         {/* Traffic Light Dots */}
         <div className={`flex items-center gap-2 ${isRtl ? 'order-last' : 'order-first'}`}>
           {showDots && (
@@ -57,7 +57,7 @@ export const WindowChrome: React.FC<WindowChromeProps> = ({
 
         {/* Center / Window Title */}
         {title && (
-          <div className="font-mono text-xs sm:text-xs text-neutral-700 dark:text-white/60 uppercase tracking-widest px-2 truncate font-semibold">
+          <div className="font-mono text-xs sm:text-xs text-[var(--text-secondary)] dark:text-[var(--text-secondary)] uppercase tracking-widest px-2 truncate font-semibold">
             {title}
           </div>
         )}
@@ -69,7 +69,10 @@ export const WindowChrome: React.FC<WindowChromeProps> = ({
       </div>
 
       {/* Content Area */}
-      <div className={contentClassName ?? 'p-4 sm:p-6 md:p-8'}>{children}</div>
+      <div className={`window-chrome-content ${contentClassName ? contentClassName : 'p-4 sm:p-6 md:p-8'}`}>
+        {children}
+      </div>
     </div>
   );
 };
+

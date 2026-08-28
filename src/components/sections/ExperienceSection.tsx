@@ -22,7 +22,7 @@ export const ExperienceSection: React.FC = () => {
           <div className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
             {t.experience.tag}
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-neutral-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[var(--text-primary)] tracking-tight">
             {t.experience.title}
           </h2>
         </motion.div>

@@ -99,6 +99,7 @@ export const en = {
     csAiFilter: 'AI Fundamentals',
     viewCode: 'Source Code',
     viewPaper: 'Research Details',
+    viewCertificate: 'View Certificate (PDF)',
     starsBadge: 'Star',
     items: {
       classifier: {
@@ -275,6 +276,24 @@ export const en = {
     cs50Sec1Body: 'Implementing alpha-beta cutoffs in adversarial game-playing agents dramatically reduced branching factor exponentiation, allowing deep 8-ply lookaheads in real-time game loops.',
     cs50Sec2Title: '2. Constraint Satisfaction & Forward Checking',
     cs50Sec2Body: 'Combining Forward Checking with the Minimum Remaining Values (MRV) heuristic solved high-degree puzzle constraints in sub-second CPU times.',
+
+    cs50SilverPost: 'Solving Harvard CS50x Puzzle Day: Global Silver Medalist Insights',
+    cs50SilverExcerpt: 'Reflections and algorithmic strategies behind winning a worldwide Silver Medal in Harvard University’s CS50x Puzzle Day 2024 — competitive logic, heuristic search, and collaborative problem solving under time pressure.',
+    cs50SilverPullQuote: 'Competitive problem-solving is not merely about algorithmic speed; it is about recognizing deep structural invariants, pruning intractable branches, and harmonizing logic with intuitive heuristics under pressure.',
+    cs50SilverSec1Title: '1. The Global Challenge: Harvard CS50x Puzzle Day 2024',
+    cs50SilverSec1Body: 'Harvard University’s annual CS50x Puzzle Day brings together thousands of computer scientists, engineers, and logic enthusiasts worldwide to solve intricate, multi-layered algorithmic and discrete mathematics puzzles. The competition tests deep combinatorial reasoning, spatial logic, cryptographic deciphering, and adversarial constraint satisfaction without reliance on brute-force execution.',
+    cs50SilverSec2Title: '2. Algorithmic Logic, Search Strategies & Constraint Satisfaction',
+    cs50SilverSec2Body: 'Tackling the most demanding puzzles required formulating them as formal Constraint Satisfaction Problems (CSPs). By leveraging Forward Checking, Minimum Remaining Values (MRV), and state-space pruning, we reduced search spaces from exponential dimensions down to deterministic, sub-second evaluations.',
+    cs50SilverSec3Title: '3. Winning the Silver Medal: Global Leaderboard & Official Certification',
+    cs50SilverSec3Body: 'Through systematic decomposition and rigorous peer verification of intermediate proof states, our team secured a Worldwide Silver Medal standing among thousands of international teams. The official certificate was awarded by Prof. David J. Malan and the Harvard CS50 teaching team.',
+    cs50SilverSec4Title: '4. Direct Translation to Machine Learning & Research Rigor',
+    cs50SilverSec4Body: 'The mental models honed during CS50x Puzzle Day—principled ablation, boundary condition testing, and heuristic tree search—directly inform my methodology in computer vision research and deep neural network architecture optimization.',
+    certShowcaseBadge: 'Harvard University • CS50x Puzzle Day 2024',
+    certShowcaseTitle: 'Harvard CS50x Puzzle Day Silver Medal Certificate',
+    certShowcaseSubtitle: 'Official Worldwide Silver Medal Award — Issued by Harvard University & Prof. David J. Malan',
+    viewCertificate: 'View Certificate (PDF)',
+    viewCertShort: 'View Certificate',
+    certificateVerified: 'Verified Academic Credential',
 
     graduationPost: 'Bachelor Graduation & Rank #1 Valedictorian: 4 Years of Dedication & Lifelong Growth',
     graduationExcerpt: 'Reflections from my first LinkedIn post: Officially graduating with Rank #1 standing in Computer Engineering from Shiraz University among 72+ students, heartfelt gratitude to mentors and peers, and the exciting research road ahead.',

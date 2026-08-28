@@ -12,6 +12,11 @@ import {
   Compass,
   ExternalLink,
   Image as ImageIcon,
+  Award,
+  FileText,
+  CheckCircle2,
+  ShieldCheck,
+  ZoomIn,
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { blogPosts } from '../../data/blogPosts';
@@ -22,12 +27,16 @@ import { SwissFlag } from '../ui/SwissFlag';
 import { SwissAspirationCard } from '../ui/SwissAspirationCard';
 import { SwissVisionGallery } from '../ui/SwissVisionGallery';
 import { LinkedInPostSpotlight } from '../ui/LinkedInPostSpotlight';
+import { MediaLightbox, LightboxMediaItem } from '../ui/MediaLightbox';
+import { MixedText } from '../ui/MixedText';
+import { Button } from '../ui/Button';
 
 export const BlogSection: React.FC = () => {
   const { t, isRtl, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activePost, setActivePost] = useState<BlogPost | null>(null);
   const [copied, setCopied] = useState(false);
+  const [singleImageLightbox, setSingleImageLightbox] = useState<LightboxMediaItem | null>(null);
 
   // Lock body scroll and add Escape key listener when activePost modal is opened
   useEffect(() => {
@@ -91,7 +100,7 @@ export const BlogSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F1115] dark:text-white mb-4"
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] mb-4"
           >
             {t.blog.title}
           </motion.h2>
@@ -101,9 +110,9 @@ export const BlogSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="text-base sm:text-lg text-[#1A1A1E] dark:text-white/70 max-w-2xl font-editorial font-normal"
+            className="text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl font-editorial font-normal"
           >
-            {t.blog.subtitle}
+            {language === 'fa' ? <MixedText text={t.blog.subtitle} /> : t.blog.subtitle}
           </motion.p>
 
           {/* Category Filter Pills */}
@@ -119,6 +128,7 @@ export const BlogSection: React.FC = () => {
               const isDreamPill = cat.id === 'dream';
               return (
                 <button
+                  type="button"
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
@@ -128,7 +138,7 @@ export const BlogSection: React.FC = () => {
                         : 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25 dark:bg-indigo-500'
                       : isDreamPill
                       ? 'glass-panel text-rose-700 dark:text-rose-400 hover:border-rose-500/40'
-                      : 'glass-panel text-[#0F1115] dark:text-white/70 hover:text-neutral-950 dark:hover:text-white'
+                      : 'glass-panel text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
                   {isDreamPill && <SwissFlag size="sm" />}
@@ -171,19 +181,24 @@ export const BlogSection: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="font-display font-bold text-base sm:text-lg text-[#0F1115] dark:text-white leading-snug mb-2">
+                <h3 className="font-display font-bold text-base sm:text-lg text-[var(--text-primary)] leading-snug mb-2">
                   {(t.blog as any)?.graduationPost || 'Bachelor Graduation & Rank #1 Valedictorian: 4 Years of Dedication'}
                 </h3>
-                <p className="font-editorial text-xs sm:text-sm text-[#1A1A1E] dark:text-white/75 leading-relaxed line-clamp-3 mb-4">
-                  {(t.blog as any)?.graduationExcerpt || 'Officially completed Bachelor’s degree in Computer Engineering, ranking first among 72+ students.'}
+                <p className="font-editorial text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3 mb-4">
+                  {language === 'fa' ? (
+                    <MixedText text={(t.blog as any)?.graduationExcerpt || 'Officially completed Bachelor’s degree in Computer Engineering, ranking first among 72+ students.'} />
+                  ) : (
+                    (t.blog as any)?.graduationExcerpt || 'Officially completed Bachelor’s degree in Computer Engineering, ranking first among 72+ students.'
+                  )}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-black/[0.06] dark:border-white/10 flex items-center justify-between gap-2">
+              <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between gap-2">
                 <span className="text-[11px] font-mono text-indigo-700 dark:text-indigo-400 font-semibold">
                   3 Slides • Verified Post
                 </span>
                 <button
+                  type="button"
                   onClick={() => {
                     const post = blogPosts.find((p) => p.isLinkedInPost) || blogPosts[1];
                     setActivePost(post);
@@ -250,20 +265,22 @@ export const BlogSection: React.FC = () => {
                 <WindowChrome
                   title={`note://${activePost.slug}.md`}
                   onClose={() => setActivePost(null)}
-                  className="w-full flex flex-col border border-black/15 dark:border-white/10 bg-white dark:bg-[#151517] shadow-2xl"
+                  className="w-full flex flex-col border border-[var(--border-medium)] bg-[var(--bg-elevated)] shadow-2xl"
                   contentClassName="p-0 flex flex-col"
                   actions={
                     <div className="flex items-center gap-2">
                       <button
+                        type="button"
                         onClick={() => handleShare(activePost)}
-                        className="p-1.5 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 text-neutral-800 dark:text-white/70 hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg hover:bg-[var(--bg-inset)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
                         title={copied ? t.blog.linkCopied : t.blog.shareArticle}
                       >
                         {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="w-4 h-4" />}
                       </button>
                       <button
+                        type="button"
                         onClick={() => setActivePost(null)}
-                        className="p-1.5 rounded-lg bg-black/[0.06] hover:bg-red-500 hover:text-white dark:bg-white/10 dark:hover:bg-red-500 text-neutral-800 dark:text-white transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold px-2.5"
+                        className="p-1.5 rounded-lg bg-[var(--bg-inset)] hover:bg-red-500 hover:text-white text-[var(--text-primary)] transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold px-2.5"
                         title="Close (Esc)"
                       >
                         <X className="w-4 h-4" />
@@ -272,10 +289,10 @@ export const BlogSection: React.FC = () => {
                     </div>
                   }
                 >
-                  <div className="p-5 sm:p-7 md:p-9 lg:p-10 space-y-6 sm:space-y-8 bg-white dark:bg-[#151517]">
+                  <div className="p-5 sm:p-7 md:p-9 lg:p-10 space-y-6 sm:space-y-8 bg-[var(--bg-elevated)] text-[var(--text-primary)]">
                     {/* Article Meta Header */}
-                    <div className="border-b border-black/[0.08] dark:border-white/10 pb-6">
-                      <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#272A30] dark:text-white/50 mb-4 font-semibold">
+                    <div className="border-b border-[var(--border-subtle)] pb-6">
+                      <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[var(--text-tertiary)] mb-4 font-semibold">
                         {activePost.isDreamPost ? (
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-rose-500/15 text-rose-700 dark:text-rose-400 font-bold border border-rose-500/30">
                             <SwissFlag size="sm" />
@@ -300,15 +317,23 @@ export const BlogSection: React.FC = () => {
                             <SwissFlag size="lg" />
                           </div>
                         )}
-                        <h1 className={`text-2xl sm:text-3xl md:text-4xl text-[#0F1115] dark:text-white leading-tight ${
+                        <h1 className={`text-2xl sm:text-3xl md:text-4xl text-[var(--text-primary)] leading-tight ${
                           activePost.isDreamPost ? 'font-vogue italic font-bold tracking-tight' : 'font-display font-extrabold'
                         }`}>
-                          {(t.blog as any)[activePost.titleKey] || activePost.titleKey}
+                          {language === 'fa' ? (
+                            <MixedText text={(t.blog as any)[activePost.titleKey] || activePost.titleKey} />
+                          ) : (
+                            (t.blog as any)[activePost.titleKey] || activePost.titleKey
+                          )}
                         </h1>
                       </div>
 
-                      <p className="font-editorial text-base sm:text-lg md:text-xl text-[#1A1A1E] dark:text-white/85 leading-relaxed max-w-4xl font-normal">
-                        {(t.blog as any)[activePost.excerptKey] || activePost.excerptKey}
+                      <p className="font-editorial text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-4xl font-normal">
+                        {language === 'fa' ? (
+                          <MixedText text={(t.blog as any)[activePost.excerptKey] || activePost.excerptKey} />
+                        ) : (
+                          (t.blog as any)[activePost.excerptKey] || activePost.excerptKey
+                        )}
                       </p>
 
                       {/* Dream Tracker Ribbon in Header if Dream Post */}
@@ -318,7 +343,7 @@ export const BlogSection: React.FC = () => {
                             <Compass className="w-4 h-4 text-rose-600" />
                             <span>{t.blog.dreamTracker}</span>
                           </div>
-                          <div className="text-[#272A30] dark:text-white/70 font-mono text-[11px] font-bold">
+                          <div className="text-[var(--text-secondary)] font-mono text-[11px] font-bold">
                             {t.blog.dreamTrackerSub}
                           </div>
                         </div>
@@ -335,8 +360,12 @@ export const BlogSection: React.FC = () => {
                         <Quote className={`w-6 h-6 shrink-0 mt-0.5 ${
                           activePost.isDreamPost ? 'text-rose-600' : 'text-indigo-600'
                         }`} />
-                        <p className="font-editorial text-base sm:text-lg italic text-[#0F1115] dark:text-neutral-200 leading-relaxed font-medium">
-                          "{(t.blog as any)[activePost.pullQuoteKey]}"
+                        <p className="font-editorial text-base sm:text-lg italic text-[var(--text-primary)] leading-relaxed font-medium">
+                          "{language === 'fa' ? (
+                            <MixedText text={(t.blog as any)[activePost.pullQuoteKey]} />
+                          ) : (
+                            (t.blog as any)[activePost.pullQuoteKey]
+                          )}"
                         </p>
                       </div>
                     )}
@@ -351,9 +380,82 @@ export const BlogSection: React.FC = () => {
                       <SwissVisionGallery items={activePost.gallery as any} />
                     )}
 
+                    {/* Certificate Showcase Card for Certificate Posts */}
+                    {activePost.isCertificatePost && activePost.coverMediaUrl && (
+                      <div className="rounded-2xl overflow-hidden border border-indigo-500/20 dark:border-indigo-500/30 bg-gradient-to-b from-slate-900 via-indigo-950/40 to-slate-950 p-5 sm:p-7 shadow-2xl space-y-6">
+                        {/* Header Badge */}
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                          <div className="flex items-center gap-2 text-indigo-300 font-mono text-xs font-semibold">
+                            <Award className="w-4 h-4 text-amber-400" />
+                            <span>{(t.blog as any).certShowcaseBadge || 'Harvard University • CS50x Puzzle Day 2024'}</span>
+                          </div>
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[11px] font-mono font-medium">
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <span>{(t.blog as any).certificateVerified || 'Verified Academic Credential'}</span>
+                          </div>
+                        </div>
+
+                        {/* Certificate Image Frame */}
+                        <div
+                          className="relative rounded-xl overflow-hidden border border-white/15 bg-black/50 shadow-inner flex items-center justify-center p-2 sm:p-4 group cursor-pointer"
+                          onClick={() => {
+                            setSingleImageLightbox({
+                              id: 'cert-cs50x',
+                              imagePath: activePost.coverMediaUrl!,
+                              title: (t.blog as any).certShowcaseTitle || 'Harvard CS50x Puzzle Day Silver Medal Certificate',
+                              subtitle: (t.blog as any).certShowcaseBadge || 'Harvard University • CS50x Puzzle Day 2024',
+                              description: (t.blog as any).certShowcaseSubtitle || 'Official Worldwide Silver Medal Award — Issued by Harvard University & Prof. David J. Malan',
+                              category: 'Certificate',
+                              badge: 'Rank #2 Silver Medal',
+                            });
+                          }}
+                        >
+                          <img
+                            src={activePost.coverMediaUrl}
+                            alt="Harvard CS50x Puzzle Day Silver Medal Certificate"
+                            loading="eager"
+                            className="w-full max-h-[500px] object-contain rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-102"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">
+                            <div className="px-4 py-2 rounded-full bg-white/95 text-neutral-950 text-xs font-bold flex items-center gap-2 shadow-2xl">
+                              <ZoomIn className="w-4 h-4 text-indigo-600" />
+                              <span>{t.blog.galleryViewFull || 'بزرگ‌نمایی مدرک'}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Certificate Metadata & Action Row */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                          <div>
+                            <h3 className="text-white font-display text-lg sm:text-xl font-bold mb-1">
+                              {(t.blog as any).certShowcaseTitle || 'Harvard CS50x Puzzle Day Silver Medal Certificate'}
+                            </h3>
+                            <p className="text-neutral-300 text-xs sm:text-sm font-editorial">
+                              {(t.blog as any).certShowcaseSubtitle || 'Official Worldwide Silver Medal Award — Issued by Harvard University & Prof. David J. Malan'}
+                            </p>
+                          </div>
+
+                          {activePost.certificatePdfUrl && (
+                            <Button
+                              variant="primary"
+                              size="md"
+                              icon={<FileText className="w-4 h-4" />}
+                              onClick={() => {
+                                window.open(activePost.certificatePdfUrl, '_blank', 'noopener,noreferrer');
+                              }}
+                              className="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/25 border-indigo-400/30"
+                            >
+                              {(t.blog as any).viewCertificate || 'View Certificate (PDF)'}
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Technical Architectural Diagram for Tech Posts */}
-                    {!activePost.isDreamPost && activePost.coverMediaUrl && (
-                      <div className="rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-slate-950 p-2 sm:p-4 shadow-xl">
+                    {!activePost.isDreamPost && !activePost.isCertificatePost && activePost.coverMediaUrl && (
+                      <div className="rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-slate-950 p-2 sm:p-4 shadow-xl">
                         <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-neutral-400 border-b border-white/10 mb-2">
                           <div className="flex items-center gap-2">
                             <ImageIcon className="w-3.5 h-3.5 text-indigo-400" />
@@ -361,20 +463,38 @@ export const BlogSection: React.FC = () => {
                           </div>
                           <span className="text-[11px] text-indigo-400 font-semibold">SVG Vector Diagram</span>
                         </div>
-                        <div className="relative rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center">
+                        <div
+                          className="relative rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center group cursor-pointer"
+                          onClick={() => {
+                            setSingleImageLightbox({
+                              id: 'tech-diagram',
+                              imagePath: activePost.coverMediaUrl!,
+                              title: (t.blog as any)[activePost.titleKey] || 'Architectural Pipeline & Model Flow',
+                              subtitle: 'Technical Architectural Diagram',
+                              description: (t.blog as any)[activePost.excerptKey] || 'High-resolution deep learning architecture flow diagram and system pipeline.',
+                              category: 'Architecture',
+                            });
+                          }}
+                        >
                           <img
                             src={activePost.coverMediaUrl}
                             alt="Technical Diagram"
-                            className="w-full max-h-[380px] object-contain rounded-lg"
+                            className="w-full max-h-[380px] object-contain rounded-lg transition-transform duration-500 group-hover:scale-102"
                             referrerPolicy="no-referrer"
                           />
+                          <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">
+                            <div className="px-4 py-2 rounded-full bg-white/95 text-neutral-950 text-xs font-bold flex items-center gap-2 shadow-2xl">
+                              <ZoomIn className="w-4 h-4 text-indigo-600" />
+                              <span>{t.blog.galleryViewFull || 'بزرگ‌نمایی دیاگرام'}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}
 
                     {/* Code Snippet Highlight if available */}
                     {activePost.codeSnippet && (
-                      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-neutral-950 text-neutral-200">
+                      <div className="rounded-xl overflow-hidden border border-[var(--border-subtle)] bg-neutral-950 text-neutral-200">
                         <div className="px-4 py-2 bg-neutral-900 border-b border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
                           <div className="flex items-center gap-2">
                             <Code2 className="w-3.5 h-3.5 text-indigo-400" />
@@ -382,31 +502,41 @@ export const BlogSection: React.FC = () => {
                           </div>
                           <span className="uppercase text-[10px] text-neutral-500">{activePost.codeSnippet.language}</span>
                         </div>
-                        <pre className="p-4 text-xs font-mono overflow-x-auto leading-relaxed text-indigo-200/90">
+                        <pre className="p-4 text-xs font-mono overflow-x-auto leading-relaxed text-indigo-200/90" dir="ltr">
                           <code>{activePost.codeSnippet.code}</code>
                         </pre>
                       </div>
                     )}
 
                     {/* Structured Body Sections */}
-                    <div className="space-y-6 text-[#1A1A1E] dark:text-white/85 leading-relaxed text-base sm:text-lg max-w-4xl">
+                    <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed text-base sm:text-lg max-w-4xl">
                       {activePost.sectionsKey.map((section, idx) => (
                         <div key={idx} className="space-y-2.5">
-                          <h2 className="font-display text-lg sm:text-xl font-bold text-[#0F1115] dark:text-white flex items-center gap-2">
+                          <h2 className="font-display text-lg sm:text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
                             <span className={`font-mono text-xs font-bold ${activePost.isDreamPost ? 'text-rose-600' : 'text-indigo-600 dark:text-indigo-400'}`}>
                               #0{idx + 1}
                             </span>
-                            <span>{(t.blog as any)[section.headingKey] || section.headingKey}</span>
+                            <span>
+                              {language === 'fa' ? (
+                                <MixedText text={(t.blog as any)[section.headingKey] || section.headingKey} />
+                              ) : (
+                                (t.blog as any)[section.headingKey] || section.headingKey
+                              )}
+                            </span>
                           </h2>
-                          <p className="font-editorial leading-relaxed text-[#1A1A1E] dark:text-white/80 font-normal">
-                            {(t.blog as any)[section.contentKey] || section.contentKey}
+                          <p className="font-editorial leading-relaxed text-[var(--text-secondary)] font-normal">
+                            {language === 'fa' ? (
+                              <MixedText text={(t.blog as any)[section.contentKey] || section.contentKey} />
+                            ) : (
+                              (t.blog as any)[section.contentKey] || section.contentKey
+                            )}
                           </p>
                         </div>
                       ))}
                     </div>
 
                     {/* Tags & Action Footer */}
-                    <div className="pt-6 border-t border-black/[0.08] dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="pt-6 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4">
                       <div className="flex flex-wrap gap-2">
                         {activePost.tags.map((tag, i) => (
                           <span
@@ -414,7 +544,7 @@ export const BlogSection: React.FC = () => {
                             className={`font-mono text-xs px-2.5 py-1 rounded ${
                               activePost.isDreamPost && (tag.includes('ETH') || tag.includes('EPFL') || tag.includes('Vision'))
                                 ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/20 font-bold'
-                                : 'bg-black/[0.05] dark:bg-white/5 text-[#272A30] dark:text-white/60 font-semibold'
+                                : 'bg-[var(--bg-inset)] text-[var(--text-tertiary)] font-semibold'
                             }`}
                           >
                             #{tag}
@@ -423,8 +553,9 @@ export const BlogSection: React.FC = () => {
                       </div>
 
                       <button
+                        type="button"
                         onClick={() => setActivePost(null)}
-                        className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#0F1115] text-white dark:bg-white dark:text-[#0F1115] hover:bg-rose-600 hover:text-white dark:hover:bg-rose-600 dark:hover:text-white transition-all cursor-pointer flex items-center gap-2 shadow-sm"
+                        className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[var(--text-primary)] text-[var(--text-inverse)] hover:bg-rose-600 hover:text-white transition-all cursor-pointer flex items-center gap-2 shadow-sm"
                       >
                         <X className="w-4 h-4" />
                         <span>{t.blog.backToAll}</span>
@@ -437,7 +568,16 @@ export const BlogSection: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Single Image Lightbox (for Certificates, Diagrams, etc.) */}
+      {singleImageLightbox && (
+        <MediaLightbox
+          isOpen={!!singleImageLightbox}
+          onClose={() => setSingleImageLightbox(null)}
+          items={[singleImageLightbox]}
+          initialIndex={0}
+        />
+      )}
     </section>
   );
 };
-

@@ -219,6 +219,12 @@ export interface BlogPost {
   isDreamPost?: boolean;
   /** Whether this post represents the LinkedIn Graduation milestone spotlight. */
   isLinkedInPost?: boolean;
+  /** Whether this post represents the Harvard CS50x Certificate milestone showcase. */
+  isCertificatePost?: boolean;
+  /** Direct URL to certificate PDF document. */
+  certificatePdfUrl?: string;
+  /** Direct URL to certificate preview image. */
+  certificateImageUrl?: string;
   /** Direct LinkedIn post URL if applicable. */
   linkedinUrl?: string;
   /** Localization key for dream badge label. */

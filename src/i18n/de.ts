@@ -99,6 +99,7 @@ export const de = {
     csAiFilter: 'KI-Grundlagen',
     viewCode: 'Quellcode ansehen',
     viewPaper: 'Forschungsdetails',
+    viewCertificate: 'Zertifikat ansehen (PDF)',
     starsBadge: 'Stern',
     items: {
       classifier: {
@@ -275,6 +276,24 @@ export const de = {
     cs50Sec1Body: 'Alpha-Beta-Cutoffs in Spielagenten reduzierten die Verzweigungsexplosion drastisch und ermöglichten 8-Schritte-Vorausschauen in Echtzeit.',
     cs50Sec2Title: '2. Constraint Satisfaction & Forward Checking',
     cs50Sec2Body: 'Die Kombination von Forward Checking mit der Minimum Remaining Values (MRV) Heuristik löste hochkomplexe Logikrätsel in Sekundenbruchteilen.',
+
+    cs50SilverPost: 'Harvard CS50x Puzzle Day Meistern: Einblicke einer weltweiten Silbermedaillengewinnerin',
+    cs50SilverExcerpt: 'Reflexionen und algorithmische Strategien hinter dem Gewinn der weltweiten Silbermedaille beim Harvard CS50x Puzzle Day 2024 — wettbewerbsorientierte Logik, heuristische Baumsuche und kollaborative Problemlösung unter Zeitdruck.',
+    cs50SilverPullQuote: 'Wettbewerbsorientierte Problemlösung beruht nicht bloß auf Ausführungsgeschwindigkeit, sondern auf dem Erkennen tiefer struktureller Invarianten, dem gezielten Beschneiden von Suchbäumen und dem harmonischen Zusammenspiel von formaler Logik und Heuristik.',
+    cs50SilverSec1Title: '1. Die globale Herausforderung: Harvard CS50x Puzzle Day 2024',
+    cs50SilverSec1Body: 'Der jährliche CS50x Puzzle Day der Harvard University bringt weltweit tausende Informatiker, Ingenieure und Logikbegeisterte zusammen, um hochkomplexe diskrete und algorithmische Rätsel zu lösen. Der Wettbewerb fordert kombinatorisches Denken, räumliche Abstraktion und Constraint-Satisfaction ohne Rückgriff auf Brute-Force-Methoden.',
+    cs50SilverSec2Title: '2. Algorithmische Logik, Suchstrategien & Constraint Satisfaction',
+    cs50SilverSec2Body: 'Die anspruchsvollsten Rätsel erforderten eine Modellierung als formale Constraint Satisfaction Problems (CSPs). Durch Forward Checking, Minimum Remaining Values (MRV) und Zustandsraum-Pruning reduzierten wir exponentielle Suchräume auf deterministische Sekundenbruchteile.',
+    cs50SilverSec3Title: '3. Gewinn der Silbermedaille: Weltweite Bestenliste & Offizielles Zertifikat',
+    cs50SilverSec3Body: 'Durch methodische Dekomposition und rigorose Verifikation von Zwischenzuständen errang unser Team eine weltweite Silbermedaillen-Platzierung unter tausenden internationalen Teams. Das offizielle Zertifikat wurde von Prof. David J. Malan und dem Harvard CS50-Dozententeam verliehen.',
+    cs50SilverSec4Title: '4. Direkter Transfer zu Deep Learning & Spitzenforschung',
+    cs50SilverSec4Body: 'Die während des CS50x Puzzle Day vertieften Denkmodelle — von systematischer Ablation bis zur heuristischen Baumsuche — fließen unmittelbar in meine Forschungsmethodik im Bereich Computer Vision und neuronale Netzwerkoptimierung ein.',
+    certShowcaseBadge: 'Harvard University • CS50x Puzzle Day 2024',
+    certShowcaseTitle: 'Harvard CS50x Puzzle Day Silbermedaillen-Zertifikat',
+    certShowcaseSubtitle: 'Offizielle weltweite Silbermedaillen-Auszeichnung — Verliehen von der Harvard University & Prof. David J. Malan',
+    viewCertificate: 'Zertifikat ansehen (PDF)',
+    viewCertShort: 'Zertifikat ansehen',
+    certificateVerified: 'Verifizierte akademische Auszeichnung',
 
     graduationPost: 'Bachelorabschluss & Jahrgangsbeste (Rang 1): 4 Jahre akademische Hingabe & stetiges Wachstum',
     graduationExcerpt: 'Einblicke aus meinem ersten LinkedIn-Beitrag: Offizieller Abschluss des Bachelorstudiums in Computer Engineering an der Universität Shiraz als Jahrgangsbeste unter 72+ Studierenden, Dank an Professoren und Ausblick auf die KI-Forschung.',

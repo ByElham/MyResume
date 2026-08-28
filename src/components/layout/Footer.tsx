@@ -1,14 +1,13 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Sparkles, Award, Brain, Star, Code2 } from 'lucide-react';
+import { Github, Linkedin, Mail, Award } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { profileData } from '../../data/profile';
 import { BespokeBrandLogo } from '../ui/BespokeBrandLogo';
 import { ERMonogramEmblem } from '../ui/ERMonogramEmblem';
-import { SwissFlag } from '../ui/SwissFlag';
 import { ArchLinuxLogo } from '../ui/ArchLinuxLogo';
 
 export const Footer: React.FC = () => {
-  const { t, language, isRtl } = useLanguage();
+  const { t, language } = useLanguage();
 
   const dedicationTitle = {
     en: 'Dedicated to Elham Rivaz',
@@ -29,7 +28,7 @@ export const Footer: React.FC = () => {
   }[language] || 'Celebrating academic excellence, innovative AI research, and high aspirations.';
 
   return (
-    <footer className="border-t border-black/[0.06] dark:border-white/10 bg-black/[0.02] dark:bg-black/30 backdrop-blur-2xl py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-elevated)] backdrop-blur-2xl py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-64 bg-indigo-500/[0.04] dark:bg-indigo-500/[0.07] blur-3xl pointer-events-none" />
 
@@ -50,7 +49,7 @@ export const Footer: React.FC = () => {
             />
 
             {/* Inner Card with Smooth Subtle Zoom on Hover */}
-            <div className="relative z-10 rounded-[22px] bg-white/95 dark:bg-neutral-950/95 p-6 sm:p-8 backdrop-blur-2xl border border-white/20 dark:border-white/5 transition-transform duration-700 ease-out transform group-hover:scale-[1.015]">
+            <div className="relative z-10 rounded-[22px] bg-[var(--bg-surface)] p-6 sm:p-8 backdrop-blur-2xl border border-[var(--border-medium)] transition-transform duration-700 ease-out transform group-hover:scale-[1.015]">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 {/* Left / Center Info */}
                 <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left rtl:sm:text-right">
@@ -66,15 +65,15 @@ export const Footer: React.FC = () => {
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center justify-center sm:justify-start rtl:sm:justify-start gap-2">
                       <ArchLinuxLogo size="sm" variant="glow" />
-                      <span className="font-editorial text-lg sm:text-xl font-bold text-[#0F1115] dark:text-white tracking-tight">
+                      <span className="font-editorial text-lg sm:text-xl font-bold text-[var(--text-primary)] tracking-tight">
                         {dedicationTitle}
                       </span>
-                      <span className="text-[#5C5C63] dark:text-white/40 text-sm font-light">•</span>
+                      <span className="text-[var(--text-muted)] text-sm font-light">•</span>
                       <span className="font-ui text-sm sm:text-base font-bold text-indigo-700 dark:text-indigo-300">
                         {dedicationAuthor}
                       </span>
                     </div>
-                    <p className="font-editorial text-xs sm:text-sm text-[#1A1A1E] dark:text-white/60 max-w-xl leading-relaxed font-normal">
+                    <p className="font-editorial text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl leading-relaxed font-normal">
                       {dedicationSub}
                     </p>
                   </div>
@@ -105,11 +104,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Navigation & Social Links */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-black/10 dark:border-white/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[var(--border-subtle)]">
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left rtl:md:text-right gap-1.5">
             <BespokeBrandLogo />
-            <p className="text-xs text-[#272A30] dark:text-white/40 max-w-sm font-mono font-medium mt-1">
+            <p className="text-xs text-[var(--text-muted)] max-w-sm font-mono font-medium mt-1">
               {profileData.title} • {profileData.location}
             </p>
           </div>
@@ -120,7 +119,7 @@ export const Footer: React.FC = () => {
               href={profileData.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl glass-panel text-[#0F1115] dark:text-white/70 hover:text-indigo-600 dark:hover:text-white hover:border-black/20 dark:hover:border-white/20 transition-all cursor-pointer shadow-xs"
+              className="p-2.5 rounded-xl glass-panel text-[var(--text-primary)] hover:text-indigo-600 dark:hover:text-white transition-all cursor-pointer shadow-xs"
               title="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -129,14 +128,14 @@ export const Footer: React.FC = () => {
               href={profileData.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl glass-panel text-[#0F1115] dark:text-white/70 hover:text-indigo-600 dark:hover:text-white hover:border-black/20 dark:hover:border-white/20 transition-all cursor-pointer shadow-xs"
+              className="p-2.5 rounded-xl glass-panel text-[var(--text-primary)] hover:text-indigo-600 dark:hover:text-white transition-all cursor-pointer shadow-xs"
               title="LinkedIn Profile"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${profileData.email}`}
-              className="p-2.5 rounded-xl glass-panel text-[#0F1115] dark:text-white/70 hover:text-indigo-600 dark:hover:text-white hover:border-black/20 dark:hover:border-white/20 transition-all cursor-pointer shadow-xs"
+              className="p-2.5 rounded-xl glass-panel text-[var(--text-primary)] hover:text-indigo-600 dark:hover:text-white transition-all cursor-pointer shadow-xs"
               title="Email"
             >
               <Mail className="w-4 h-4" />
@@ -145,7 +144,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Credits & Status */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 text-xs text-[#272A30] dark:text-white/40 font-mono font-medium">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 text-xs text-[var(--text-muted)] font-mono font-medium">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{t.footer.systemStatus}</span>

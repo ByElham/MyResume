@@ -5,6 +5,7 @@ import { BlogPost } from '../../types';
 import { assetPath } from '../../utils/assetPath';
 import { useLanguage } from '../../context/LanguageContext';
 import { SwissFlag } from './SwissFlag';
+import { MixedText } from './MixedText';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -13,7 +14,7 @@ interface BlogCardProps {
 }
 
 export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = false }) => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl, language } = useLanguage();
 
   const title = (t.blog as any)[post.titleKey] || post.titleKey;
   const excerpt = (t.blog as any)[post.excerptKey] || post.excerptKey;
@@ -43,6 +44,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
               <img
                 src={post.coverMediaUrl || assetPath('/media/blog/03-rhine-falls-waterfall.jpg')}
                 alt={title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = assetPath('/media/blog/03-rhine-falls-waterfall.svg');
@@ -80,6 +82,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
               <img
                 src={post.coverMediaUrl}
                 alt={title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
                 onError={(e) => {
                   const target = e.currentTarget as HTMLImageElement;
@@ -124,7 +127,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
           </div>
         ) : (
           /* Card Header: Category & Read Time (for standard / non-hero cards) */
-          <div className="flex items-center justify-between gap-3 text-xs text-neutral-500 dark:text-white/50 font-mono mb-4">
+          <div className="flex items-center justify-between gap-3 text-xs text-[var(--text-tertiary)] font-mono mb-4">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                 {category}
@@ -145,7 +148,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
             </div>
           )}
           <h3
-            className={`font-display font-bold text-[#0F1115] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug ${
+            className={`font-display font-bold text-[var(--text-primary)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug ${
               featured && isDream
                 ? 'font-vogue text-2xl sm:text-3xl md:text-4xl italic font-bold tracking-tight'
                 : featured
@@ -153,22 +156,22 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
                 : 'text-lg sm:text-xl'
             }`}
           >
-            {title}
+            {language === 'fa' ? <MixedText text={title} /> : title}
           </h3>
         </div>
 
         {/* Excerpt - Editorial Serif Typography */}
         <p
-          className={`font-editorial text-[#1A1A1E] dark:text-white/75 leading-relaxed mb-6 font-normal ${
+          className={`font-editorial text-[var(--text-secondary)] leading-relaxed mb-6 font-normal ${
             featured ? 'text-base sm:text-lg line-clamp-3' : 'text-sm line-clamp-3'
           }`}
         >
-          {excerpt}
+          {language === 'fa' ? <MixedText text={excerpt} /> : excerpt}
         </p>
 
         {/* Dream Tracker Milestone Subtext if Dream Post */}
         {isDream && (
-          <div className="mb-6 px-4 py-2.5 rounded-xl bg-rose-500/[0.06] dark:bg-rose-500/10 border border-rose-500/20 flex items-center gap-2.5 text-xs text-[#0F1115] dark:text-rose-200">
+          <div className="mb-6 px-4 py-2.5 rounded-xl bg-rose-500/[0.06] dark:bg-rose-500/10 border border-rose-500/20 flex items-center gap-2.5 text-xs text-[var(--text-primary)] dark:text-rose-200">
             <Compass className="w-4 h-4 text-rose-600 shrink-0" />
             <span className="font-semibold">{t.blog.dreamTrackerSub}</span>
           </div>
@@ -176,7 +179,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
       </div>
 
       {/* Footer: Tags & Read CTA */}
-      <div className="pt-4 border-t border-black/[0.05] dark:border-white/5 flex flex-wrap items-center justify-between gap-3">
+      <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-1.5">
           {post.tags.slice(0, featured ? 5 : 3).map((tag, i) => (
             <span
@@ -184,7 +187,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
               className={`text-[11px] font-mono px-2 py-0.5 rounded ${
                 isDream && (tag.includes('ETH') || tag.includes('EPFL') || tag.includes('Vision'))
                   ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 font-semibold'
-                  : 'bg-black/[0.03] dark:bg-white/5 text-neutral-500 dark:text-white/40'
+                  : 'bg-[var(--bg-inset)] text-[var(--text-tertiary)]'
               }`}
             >
               #{tag}
@@ -194,10 +197,9 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelect, featured = f
 
         <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform whitespace-nowrap">
           <span>{t.blog.readArticle}</span>
-          <ArrowRight className={`w-3.5 h-3.5 ${isRtl ? 'rotate-180' : ''}`} />
+          <ArrowRight className={`w-3.5 h-3.5 ${isRtl ? 'scale-x-[-1]' : ''}`} />
         </div>
       </div>
     </motion.article>
   );
 };
-

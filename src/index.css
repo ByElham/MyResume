@@ -1,30 +1,54 @@
 @import "tailwindcss";
+@import "./styles/globals.css";
 
 @theme {
+  /* Background Layers */
+  --color-bg-page: var(--bg-page);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-glass: var(--bg-glass);
+
+  /* Text Colors */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverted: var(--text-inverted);
+  --color-text-tertiary: var(--text-tertiary);
+
+  /* Border Colors */
+  --color-border-medium: var(--border-medium);
+  --color-border-strong: var(--border-strong);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-hover: var(--border-hover);
+
+  /* Accent */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+
+  /* Backwards-compatibility aliases */
+  --color-primary: var(--bg-page);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-elevated);
+  --color-content: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+
+  /* Typography */
+  --font-persian: 'MixedText', 'Estedad', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  --font-persian-heading: 'MixedText', 'Estedad', 'Vazirmatn', -apple-system, sans-serif;
+  --font-persian-serif: 'MixedText', 'Noto Serif Persian', 'Vazirmatn', serif;
+  --font-body: 'Inter', 'Source Serif 4', 'Segoe UI', system-ui, sans-serif;
   --font-vogue: 'Bodoni Moda', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
   --font-accent: 'Bodoni Moda', 'Playfair Display', 'Fraunces', Georgia, serif;
   --font-heading: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
   --font-display: 'Fraunces', 'Playfair Display', 'Source Serif 4', Georgia, serif;
-  --font-body: 'Source Serif 4', 'Newsreader', Georgia, serif;
   --font-serif: 'Source Serif 4', 'Newsreader', Georgia, serif;
   --font-editorial: 'Source Serif 4', 'Newsreader', Georgia, serif;
   --font-ui: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-persian: 'Estedad', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
-  --font-persian-heading: 'Estedad', 'Vazirmatn', -apple-system, sans-serif;
-  --font-persian-serif: 'Noto Serif Persian', 'Vazirmatn', serif;
-
-  --color-primary: var(--bg-primary);
-  --color-surface: var(--bg-surface);
-  --color-surface-elevated: var(--bg-surface-elevated);
-  --color-content: var(--text-primary);
-  --color-secondary: var(--text-secondary);
-  --color-tertiary: var(--text-tertiary);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-border-subtle: var(--border-subtle);
-  --color-border-hover: var(--border-hover);
 }
 
 @layer base {
@@ -166,6 +190,8 @@
     font-family: var(--font-body);
     color: var(--text-primary);
     background-color: var(--bg-primary);
+    overflow-x: hidden;
+    max-width: 100vw;
     transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
                 color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -175,11 +201,16 @@
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.65;
+    overflow-x: hidden;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
   }
 
   /* Light mode contrast enforcement for rich, deep typography */
   html:not(.dark) {
     color: #090A0C;
+    background-color: #F8FAFC;
   }
   
   html:not(.dark) h1,
@@ -191,8 +222,13 @@
     color: #090A0C;
   }
 
-  html:not(.dark) p:not([class*="text-white"]):not([class*="text-rose-"]):not([class*="text-indigo-"]) {
+  html:not(.dark) p:not([class*="text-white"]):not([class*="text-rose-"]):not([class*="text-indigo-"]):not([class*="text-emerald-"]):not([class*="text-amber-"]) {
     color: #18191D;
+  }
+
+  html:not(.dark) .glass-nav {
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   /* German language typography tuning for compound words */
@@ -361,6 +397,33 @@ html[dir="rtl"] .font-sans,
 [dir="rtl"] .font-ui,
 [dir="rtl"] .font-sans {
   font-family: var(--font-persian), 'Estedad', 'Vazirmatn', sans-serif !important;
+}
+
+/* Latin overrides for mixed-script content within RTL containers */
+html[dir="rtl"] [dir="ltr"],
+[dir="rtl"] [dir="ltr"],
+html[dir="rtl"] span[dir="ltr"],
+[dir="rtl"] span[dir="ltr"] {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] [dir="ltr"].font-body,
+html[dir="rtl"] [dir="ltr"].font-serif,
+html[dir="rtl"] [dir="ltr"].font-editorial,
+html[dir="rtl"] [dir="ltr"].font-sans,
+html[dir="rtl"] [dir="ltr"].font-ui,
+[dir="rtl"] [dir="ltr"].font-body,
+[dir="rtl"] [dir="ltr"].font-serif,
+[dir="rtl"] [dir="ltr"].font-editorial,
+[dir="rtl"] [dir="ltr"].font-sans,
+[dir="rtl"] [dir="ltr"].font-ui {
+  font-family: var(--font-body), 'Source Serif 4', Georgia, serif !important;
+}
+
+html[dir="rtl"] [dir="ltr"].font-mono,
+[dir="rtl"] [dir="ltr"].font-mono {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace !important;
 }
 
 /* Glassmorphism helpers */
@@ -620,28 +683,25 @@ html[dir="rtl"] .animate-swiss-wave {
 }
 
 /* ==========================================================================
-   Custom Premium Theme-Aware Scrollbar
+   Custom Premium Theme-Aware Scrollbar (Zero Reflow, Stable Width)
    ========================================================================== */
 
-/* Firefox Fallback */
+/* Firefox Standard */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb-idle) transparent;
+  scrollbar-color: var(--scrollbar-thumb-idle) var(--scrollbar-track);
 }
 
 /* WebKit / Blink (Chromium, Safari, Edge) */
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   background-color: transparent;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::-webkit-scrollbar-track {
   background-color: var(--scrollbar-track);
   border-radius: 9999px;
-  margin: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -650,46 +710,22 @@ html[dir="rtl"] .animate-swiss-wave {
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: padding-box;
-  box-shadow: 0 0 8px var(--scrollbar-glow-idle);
-  opacity: 0.65;
-  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              background-image 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Dynamic auto-fade during active document or container scrolling */
-html[data-scrolling="true"] ::-webkit-scrollbar-thumb,
-[data-scrolling="true"]::-webkit-scrollbar-thumb {
-  opacity: 0.95;
-  box-shadow: 0 0 10px var(--scrollbar-glow-idle);
-}
-
-/* Interactive macOS-style hover expansion & illumination with rich color burst */
-::-webkit-scrollbar:hover {
-  width: 11px;
-  height: 11px;
+  box-shadow: 0 0 6px var(--scrollbar-glow-idle);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-hover);
   background-image: var(--scrollbar-thumb-gradient-hover);
-  background-clip: padding-box;
-  border-width: 1px;
-  box-shadow: 0 0 16px var(--scrollbar-glow-hover), 0 0 4px var(--scrollbar-glow-hover);
-  opacity: 1;
+  border: 1px solid transparent;
+  box-shadow: 0 0 12px var(--scrollbar-glow-hover);
 }
 
-/* Active drag state */
 ::-webkit-scrollbar-thumb:active {
   background-color: var(--scrollbar-thumb-active);
   background-image: var(--scrollbar-thumb-gradient-hover);
-  background-clip: padding-box;
-  border-width: 0px;
-  box-shadow: 0 0 20px var(--scrollbar-glow-hover), 0 0 6px var(--scrollbar-glow-hover);
-  opacity: 1;
+  border: 0px solid transparent;
+  box-shadow: 0 0 16px var(--scrollbar-glow-hover);
 }
 
 ::-webkit-scrollbar-corner {
@@ -703,39 +739,31 @@ html[data-scrolling="true"] ::-webkit-scrollbar-thumb,
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
   border-radius: 9999px;
-  margin: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-idle);
+  background-color: var(--scrollbar-thumb-idle);
   background-image: var(--scrollbar-thumb-gradient);
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: padding-box;
-  box-shadow: 0 0 8px var(--scrollbar-glow-idle);
-  opacity: 0.65;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.custom-scrollbar::-webkit-scrollbar:hover {
-  width: 11px;
-  height: 11px;
+  box-shadow: 0 0 6px var(--scrollbar-glow-idle);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
+  background-color: var(--scrollbar-thumb-hover);
   background-image: var(--scrollbar-thumb-gradient-hover);
-  background-clip: padding-box;
-  border-width: 1px;
-  box-shadow: 0 0 16px var(--scrollbar-glow-hover);
-  opacity: 1;
+  border: 1px solid transparent;
+  box-shadow: 0 0 12px var(--scrollbar-glow-hover);
 }
 
 @media (prefers-reduced-motion: reduce) {

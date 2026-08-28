@@ -83,7 +83,7 @@ export const HeroStatBadge: React.FC<HeroStatBadgeProps> = ({
       </div>
 
       {/* Label and Bobbing Icon */}
-      <div className="flex items-center gap-1.5 text-[11px] text-[#272A30] dark:text-white/60 font-mono font-semibold mb-1 uppercase tracking-wider relative z-10">
+      <div className="flex items-center gap-1.5 text-[11px] text-[var(--text-tertiary)] font-mono font-semibold mb-1 uppercase tracking-wider relative z-10">
         <motion.span
           animate={{ y: [0, -2.5, 0] }}
           transition={{
@@ -107,7 +107,7 @@ export const HeroStatBadge: React.FC<HeroStatBadgeProps> = ({
             : { scale: 1 }
         }
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="font-display font-bold text-sm sm:text-base text-[#0F1115] dark:text-white truncate relative z-10"
+        className="font-display font-bold text-sm sm:text-base text-[var(--text-primary)] truncate relative z-10"
       >
         {staticValue ? (
           staticValue

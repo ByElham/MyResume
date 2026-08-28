@@ -38,7 +38,7 @@ export const SakuraPetalsCanvas: React.FC = () => {
 
     // Responsive petal count (fewer on mobile for 60fps smoothness)
     const isMobile = width < 768;
-    const PETAL_COUNT = isMobile ? 28 : 55;
+    const PETAL_COUNT = isMobile ? 18 : 55;
 
     // Petal color palettes depending on dark / light mode
     const isDark = theme === 'dark';

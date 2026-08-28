@@ -4,7 +4,6 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
   Award,
   GraduationCap,
   Share2,
@@ -14,18 +13,16 @@ import {
   Copy,
   Info,
   Maximize2,
-  Bookmark,
   Calendar,
-  Users,
   Sun,
   Moon,
-  Globe,
 } from 'lucide-react';
 import { assetPath } from '../../utils/assetPath';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { supportedLanguages } from '../../i18n';
 import { LanguageCode } from '../../types';
+import { MediaLightbox, LightboxMediaItem } from './MediaLightbox';
 
 export interface LinkedInSlide {
   id: string;
@@ -112,6 +109,8 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
   // Auto handle slide navigation keys
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxOpen) return; // Handled by Lightbox itself
+
       if (e.key === 'ArrowRight') {
         if (isRtl) {
           setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -125,9 +124,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
           setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
         }
       } else if (e.key === 'Escape') {
-        if (lightboxOpen) {
-          setLightboxOpen(false);
-        } else if (onClose) {
+        if (onClose) {
           onClose();
         }
       }
@@ -146,7 +143,9 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
   };
 
   const handleCopyText = () => {
-    const fullText = (t.linkedinPost as any)?.fullShareText || `As my first LinkedIn post, I am deeply honored to share that I have officially graduated with a Bachelor's Degree in Computer Engineering, achieving the Rank #1 standing across our entire cohort of 72+ students.\n\nPost: ${postUrl}`;
+    const fullText =
+      (t.linkedinPost as any)?.fullShareText ||
+      `As my first LinkedIn post, I am deeply honored to share that I have officially graduated with a Bachelor's Degree in Computer Engineering, achieving the Rank #1 standing across our entire cohort of 72+ students.\n\nPost: ${postUrl}`;
     navigator.clipboard.writeText(fullText);
     setCopiedText(true);
     setTimeout(() => setCopiedText(false), 2200);
@@ -184,6 +183,18 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
     }
   };
 
+  const lightboxSlides: LightboxMediaItem[] = slides.map((s, idx) => ({
+    id: s.id,
+    imagePath: getSlideSrc(idx),
+    fallbackSvg: s.fallbackSvg,
+    title: (t.linkedinPost as any)?.[s.titleKey] || `Slide #${s.order}`,
+    subtitle: (t.linkedinPost as any)?.[s.subtitleKey],
+    description: (t.linkedinPost as any)?.[s.captionKey],
+    category: 'Graduation Slides',
+    number: s.order,
+    fileName: s.fileName,
+  }));
+
   return (
     <div
       className={`relative rounded-2xl sm:rounded-3xl border border-indigo-500/20 dark:border-white/10 bg-white dark:bg-[#121318] shadow-2xl overflow-hidden ${className}`}
@@ -218,6 +229,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
             {supportedLanguages.map((l) => (
               <button
                 key={l.code}
+                type="button"
                 onClick={() => setLanguage(l.code as LanguageCode)}
                 className={`px-2 py-1 text-[10px] font-mono font-bold rounded-md transition-all cursor-pointer ${
                   language === l.code
@@ -233,6 +245,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
 
           {/* Theme Switcher Shortcut */}
           <button
+            type="button"
             onClick={toggleTheme}
             className="p-2 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-white/80 transition-colors cursor-pointer"
             title={isDark ? 'تغییر به تم روشن / Switch to Light Mode' : 'تغییر به تم تاریک / Switch to Dark Mode'}
@@ -253,6 +266,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
 
           {onClose && (
             <button
+              type="button"
               onClick={onClose}
               className="p-1.5 rounded-lg bg-black/5 dark:bg-white/10 hover:bg-rose-600 hover:text-white text-neutral-600 dark:text-white transition-colors cursor-pointer"
               title="Close (Esc)"
@@ -274,6 +288,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
+                  type="button"
                   onClick={() => setActiveSlide(idx)}
                   className={`px-3 py-1 rounded-full text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
                     activeSlide === idx
@@ -289,12 +304,13 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
 
             {/* Lightbox Zoom Trigger */}
             <button
+              type="button"
               onClick={() => setLightboxOpen(true)}
-              className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono"
-              title="نمای تمام‌صفحه / Fullscreen"
+              className="p-2 rounded-xl bg-white/10 hover:bg-indigo-600 text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono border border-white/15"
+              title="بزرگ‌نمایی تصویر"
             >
               <Maximize2 className="w-3.5 h-3.5 text-indigo-300" />
-              <span className="hidden sm:inline">Zoom</span>
+              <span>Zoom</span>
             </button>
           </div>
 
@@ -321,7 +337,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
                 src={getSlideSrc(activeSlide)}
                 alt={`Slide ${currentSlide.order}`}
                 onError={(e) => handleImgError(activeSlide, e)}
-                className="relative z-10 max-h-[380px] sm:max-h-[440px] w-auto max-w-full object-contain drop-shadow-2xl rounded-lg"
+                className="relative z-10 max-h-[360px] sm:max-h-[440px] w-auto max-w-full object-contain drop-shadow-2xl rounded-lg"
                 referrerPolicy="no-referrer"
               />
             </AnimatePresence>
@@ -336,6 +352,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
 
             {/* Slide Navigation Arrow Left */}
             <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrevSlide();
@@ -348,6 +365,7 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
 
             {/* Slide Navigation Arrow Right */}
             <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 handleNextSlide();
@@ -445,15 +463,21 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
           <div className="pt-4 border-t border-black/[0.08] dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <button
+                type="button"
                 onClick={handleCopyText}
                 className="px-3.5 py-2 rounded-xl bg-black/[0.05] dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[#0F1115] dark:text-white text-xs font-mono font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
                 title="کپی متن کامل پست"
               >
                 {copiedText ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedText ? (t.linkedinPost as any)?.textCopied || 'Copied!' : (t.linkedinPost as any)?.copyText || 'Copy Text'}</span>
+                <span>
+                  {copiedText
+                    ? (t.linkedinPost as any)?.textCopied || 'Copied!'
+                    : (t.linkedinPost as any)?.copyText || 'Copy Text'}
+                </span>
               </button>
 
               <button
+                type="button"
                 onClick={handleCopyLink}
                 className="px-3 py-2 rounded-xl bg-black/[0.05] dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[#0F1115] dark:text-white text-xs font-mono font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
                 title="کپی لینک پست"
@@ -476,87 +500,15 @@ export const LinkedInPostSpotlight: React.FC<LinkedInPostSpotlightProps> = ({
         </div>
       </div>
 
-      {/* Fullscreen Lightbox Modal for any slide */}
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6 bg-black/92 backdrop-blur-xl"
-            onClick={() => setLightboxOpen(false)}
-          >
-            <div
-              className="relative max-w-5xl w-full flex flex-col items-center my-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setLightboxOpen(false)}
-                className="absolute -top-12 right-0 p-2 rounded-full bg-white/15 hover:bg-rose-600 text-white transition-all cursor-pointer shadow-lg flex items-center gap-1 text-xs font-mono px-3"
-                title="بستن (Esc)"
-              >
-                <X className="w-4 h-4" />
-                <span>Esc</span>
-              </button>
-
-              {/* Navigation Left / Right */}
-              <button
-                onClick={handlePrevSlide}
-                className="absolute left-2 sm:-left-14 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10 cursor-pointer shadow-lg backdrop-blur-md"
-                title="قبلی"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-
-              <button
-                onClick={handleNextSlide}
-                className="absolute right-2 sm:-right-14 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10 cursor-pointer shadow-lg backdrop-blur-md"
-                title="بعدی"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-
-              {/* Lightbox Frame */}
-              <div className="w-full rounded-2xl overflow-hidden border border-white/15 bg-neutral-950 shadow-2xl flex flex-col">
-                <div className="relative max-h-[70vh] min-h-[280px] flex items-center justify-center bg-black p-4">
-                  <img
-                    src={getSlideSrc(activeSlide)}
-                    alt={`Slide ${currentSlide.order}`}
-                    onError={(e) => handleImgError(activeSlide, e)}
-                    className="max-h-[65vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-
-                {/* Thumbnails in Lightbox */}
-                <div className="px-4 py-3 bg-neutral-900 border-t border-white/10 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    {slides.map((s, idx) => (
-                      <button
-                        key={s.id}
-                        onClick={() => setActiveSlide(idx)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-                          activeSlide === idx
-                            ? 'bg-indigo-600 text-white font-bold ring-2 ring-indigo-400'
-                            : 'bg-white/10 text-white/70 hover:bg-white/20'
-                        }`}
-                      >
-                        slide-{s.order}
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="text-xs font-mono text-white/60 flex items-center gap-1.5">
-                    <Info className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Upload: /public/media/linkedin/graduation/{currentSlide.fileName} (.jpeg / .jpg / .png)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Unified High-Performance Media Lightbox Modal for LinkedIn Slides */}
+      {lightboxOpen && (
+        <MediaLightbox
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          items={lightboxSlides}
+          initialIndex={activeSlide}
+        />
+      )}
     </div>
   );
 };
