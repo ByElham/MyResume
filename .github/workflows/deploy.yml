@@ -28,7 +28,7 @@ on:
 #   - id-token: write  → request an OIDC token for secure deployment
 # ------------------------------------------------------------------------------
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -88,7 +88,17 @@ jobs:
         uses: actions/configure-pages@v4
 
       # ------------------------------------------------------------------
-      # 6. Package the build output as a Pages deployment artifact.
+      # 6. Publish build output to gh-pages branch (for branch-based hosting)
+      # ------------------------------------------------------------------
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+
+      # ------------------------------------------------------------------
+      # 7. Package the build output as a Pages deployment artifact.
       # ------------------------------------------------------------------
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -96,7 +106,7 @@ jobs:
           path: './dist'
 
       # ------------------------------------------------------------------
-      # 7. Publish the artifact to GitHub Pages.
+      # 8. Publish the artifact directly to GitHub Pages (Actions-based hosting)
       # ------------------------------------------------------------------
       - name: Deploy to GitHub Pages
         id: deployment
