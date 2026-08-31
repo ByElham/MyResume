@@ -1,20 +1,16 @@
 # ==============================================================================
 # GitHub Actions Workflow: Deploy to GitHub Pages
-# ------------------------------------------------------------------------------
-# Purpose : Automatically build the Vite/React static site and publish it to
-#           GitHub Pages whenever a change is pushed to the `main` branch.
-# Notes   : npm caching is intentionally disabled because this repository does
-#           not commit a lock file (package-lock.json / yarn.lock). Using
-#           `cache: 'npm'` without a lock file causes the job to fail before
-#           dependencies are even installed. If a lock file is added later,
-#           re-enable caching and switch back to `npm ci` for faster, more
-#           reproducible builds.
+# ==============================================================================
+# Purpose     : Automatically build the Vite/React static site and deploy it
+#               to GitHub Pages on every push to the `main` branch.
+# Architecture: Uses the official GitHub Pages actions with OIDC authentication.
+#               No personal tokens or extra secrets are required.
 # ==============================================================================
 
 name: Deploy to GitHub Pages
 
 # ------------------------------------------------------------------------------
-# Trigger: run this workflow on every push to the main branch.
+# Trigger: run on every push to the main branch.
 # ------------------------------------------------------------------------------
 on:
   push:
@@ -22,28 +18,25 @@ on:
       - main
 
 # ------------------------------------------------------------------------------
-# Permissions required by the official GitHub Pages deployment actions:
-#   - contents: read   → checkout the repository code
-#   - pages: write     → publish the build output to GitHub Pages
-#   - id-token: write  → request an OIDC token for secure deployment
+# Permissions: minimal required for Pages deployment with OIDC.
 # ------------------------------------------------------------------------------
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 # ------------------------------------------------------------------------------
-# Concurrency: ensure only one deployment runs at a time, and cancel any
-# in-progress deployment if a newer push arrives.
+# Concurrency: cancel outdated in-progress runs to save resources.
 # ------------------------------------------------------------------------------
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+# ------------------------------------------------------------------------------
+# Job: build and deploy in one unified pipeline.
+# ------------------------------------------------------------------------------
 jobs:
   build-and-deploy:
-    # GitHub Pages requires this specific environment for the deploy step
-    # to expose the live URL in the Actions run summary.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -51,63 +44,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ------------------------------------------------------------------
-      # 1. Fetch the repository source code onto the runner.
-      # ------------------------------------------------------------------
+      # ------------------------------------------------------------------------
+      # 1. Checkout source code
+      # ------------------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ------------------------------------------------------------------
-      # 2. Install the Node.js runtime used to build the project.
-      #    NOTE: `cache: 'npm'` is deliberately omitted — it requires a
-      #    lock file to key the cache, which this repo doesn't have.
-      # ------------------------------------------------------------------
-      - name: Set up Node.js
+      # ------------------------------------------------------------------------
+      # 2. Setup Node.js
+      #    Note: caching is disabled because no lockfile is committed.
+      #    If a lockfile is added later, enable `cache: 'npm'` and switch to `npm ci`.
+      # ------------------------------------------------------------------------
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ------------------------------------------------------------------
-      # 3. Install project dependencies.
-      #    Using `npm install` (not `npm ci`) since no lock file exists
-      #    to pin exact versions. Prefer `npm ci` once one is committed.
-      # ------------------------------------------------------------------
+      # ------------------------------------------------------------------------
+      # 3. Install dependencies (using `npm install` since no lockfile exists)
+      # ------------------------------------------------------------------------
       - name: Install dependencies
         run: npm install
 
-      # ------------------------------------------------------------------
-      # 4. Build the static production bundle (outputs to ./dist).
-      # ------------------------------------------------------------------
+      # ------------------------------------------------------------------------
+      # 4. Build static production bundle → ./dist
+      # ------------------------------------------------------------------------
       - name: Build static site
         run: npm run build
 
-      # ------------------------------------------------------------------
-      # 5. Configure GitHub Pages settings for this repository.
-      # ------------------------------------------------------------------
-      - name: Setup Pages
+      # ------------------------------------------------------------------------
+      # 5. Configure GitHub Pages and ENABLE it for this repository
+      #    The `enablement: true` flag ensures Pages is turned on,
+      #    preventing the "Get Pages site failed" error.
+      # ------------------------------------------------------------------------
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
-
-      # ------------------------------------------------------------------
-      # 6. Publish build output to gh-pages branch (for branch-based hosting)
-      # ------------------------------------------------------------------
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          enablement: true
 
-      # ------------------------------------------------------------------
-      # 7. Package the build output as a Pages deployment artifact.
-      # ------------------------------------------------------------------
-      - name: Upload artifact
+      # ------------------------------------------------------------------------
+      # 6. Upload the build output as a Pages deployment artifact
+      # ------------------------------------------------------------------------
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
-      # ------------------------------------------------------------------
-      # 8. Publish the artifact directly to GitHub Pages (Actions-based hosting)
-      # ------------------------------------------------------------------
+      # ------------------------------------------------------------------------
+      # 7. Deploy to GitHub Pages (this step uses OIDC, no token required)
+      # ------------------------------------------------------------------------
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
