@@ -1,10 +1,10 @@
 <div align="center">
 
-# ✨ ER | Electronic Resume 🌸
+# ✨ MyResume | Electronic Resume 🌸
 
 **A meticulously crafted digital portfolio, built with an obsession for motion design, micro-interactions, and pixel-perfect execution.**
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat&logo=github&logoColor=white)](https://mohammad-hussein-dev.github.io/ER/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat&logo=github&logoColor=white)](https://byelham.github.io/MyResume/)
 [![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.0.5-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -27,7 +27,7 @@ This project is not just a template; it's a **design system implementation** and
 The codebase follows a scalable and maintainable structure:
 
 ```
-ER/
+MyResume/
 ├── .github/                # GitHub configuration (Actions, etc.)
 │   └── workflows/
 │       └── deploy.yml      # Automated deployment to GitHub Pages
@@ -110,11 +110,11 @@ The UI feels alive through a layered animation system:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Mohammad-Hussein-Dev/ER.git
+    git clone https://github.com/ByElham/MyResume.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
-    cd ER
+    cd MyResume
     ```
 3.  **Install dependencies:**
     ```bash
@@ -142,7 +142,7 @@ This project is configured for **automatic deployment** to GitHub Pages via GitH
     *   Install dependencies.
     *   Build the project.
     *   Deploy the contents of the `dist/` folder to the `gh-pages` branch.
-    *   Your site will be live at `https://mohammad-hussein-dev.github.io/ER/` within a few minutes.
+    *   Your site will be live at `https://byelham.github.io/MyResume/` within a few minutes.
 
 ## 📄 License
 
